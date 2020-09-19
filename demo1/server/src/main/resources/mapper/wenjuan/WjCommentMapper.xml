@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjCommentMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjComment" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="subscriberId" property="subscriberId" jdbcType="BIGINT" />
+    <result column="subscriberSurface" property="subscriberSurface" jdbcType="VARCHAR" />
+    <result column="subscriberNature" property="subscriberNature" jdbcType="VARCHAR" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="useless" property="useless" jdbcType="BIGINT" />
+    <result column="fabulous" property="fabulous" jdbcType="BIGINT" />
+    <result column="surface" property="surface" jdbcType="VARCHAR" />
+    <result column="nature" property="nature" jdbcType="VARCHAR" />
+    <result column="surfaceId" property="surfaceId" jdbcType="BIGINT" />
+    <result column="costSurface" property="costSurface" jdbcType="VARCHAR" />
+    <result column="costNature" property="costNature" jdbcType="VARCHAR" />
+    <result column="costSurfaceId" property="costSurfaceId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, createTime, state, subscriberId, comment, useless, fabulous, surface, nature, surfaceId, 
+    costSurface, costNature, costSurfaceId,subscriberSurface,subscriberNature
+  </sql>
+  <sql id="Base_name" >
+    wj_comment
+  </sql>
+  <sql id="orderAttr" >
+    id
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjComment" keyProperty="id" useGeneratedKeys="true">
+    insert into wj_comment (id, createTime, state, 
+      subscriberId, comment, useless, 
+      fabulous, surface, nature, 
+      surfaceId, costSurface, costNature, 
+      costSurfaceId,subscriberSurface,subscriberNature)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER}, 
+      #{subscriberId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, #{useless,jdbcType=BIGINT}, 
+      #{fabulous,jdbcType=BIGINT}, #{surface,jdbcType=VARCHAR}, #{nature,jdbcType=VARCHAR}, 
+      #{surfaceId,jdbcType=BIGINT}, #{costSurface,jdbcType=VARCHAR}, #{costNature,jdbcType=VARCHAR},
+      #{costSurfaceId,jdbcType=BIGINT}, #{subscriberSurface,jdbcType=VARCHAR}, #{subscriberNature,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjComment" >
+    update wj_comment
+    set createTime = #{createTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      subscriberId = #{subscriberId,jdbcType=BIGINT},
+      subscriberNature = #{subscriberNature,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      useless = #{useless,jdbcType=BIGINT},
+      fabulous = #{fabulous,jdbcType=BIGINT},
+      surface = #{surface,jdbcType=VARCHAR},
+      nature = #{nature,jdbcType=VARCHAR},
+      surfaceId = #{surfaceId,jdbcType=BIGINT},
+      costSurface = #{costSurface,jdbcType=VARCHAR},
+      costNature = #{costNature,jdbcType=VARCHAR},
+      costSurfaceId = #{costSurfaceId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" />
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+
+  <update id="updataSql" parameterType="java.lang.String" >
+    ${sql}
+  </update>
+  <select id="querySql" resultType="java.util.Map">
+    ${sql}
+  </select>
+</mapper>

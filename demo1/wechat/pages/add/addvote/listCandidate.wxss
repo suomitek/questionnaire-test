@@ -1,0 +1,116 @@
+/* pages/add/addvote/listCandidate.wxss */
+page{
+  background-color: #fff;
+}
+.headerTab{
+  width: 100%;
+  z-index:999;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 0 0 20rpx 20rpx;
+  position: fixed;
+  top: 0;
+}
+.headerTab .title{
+  height: 70rpx;
+  width: 180rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  text-align: center;
+  display: table;
+  table-layout: fixed;
+}
+.headerTab .title.selected{
+  border-bottom: 7rpx solid #1296db;
+  font-weight: 600;
+}
+.addview{
+  width: 90vw;
+  padding: 5vw 0;
+  margin: 0 5vw;
+  margin-top: 75rpx;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1rpx dashed #ccc;
+  border-bottom:1rpx dashed #ccc;
+}
+.title{
+  font-size: 30rpx;
+}
+.list-box{
+  width: 100vw;
+  padding-bottom: 20rpx;
+}
+
+
+
+.candidateList{
+  width: 90vw;
+  padding: 0 5vw;
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #fff;
+}
+
+.candidate2{
+  width: 100%;
+  padding: 20rpx 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  border-bottom: 1rpx dashed #ccc;
+  justify-content: space-between;
+}
+.candidate2-num{
+  font-size: 900;
+  display: flex;
+  justify-content: center;
+}
+.candidate2-num .icon{
+  width: 20vw;
+  height: 20vw;
+}
+.candidate-btn{
+  height: 100%;
+  width: 20%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+.addBtn{
+  width: 100rpx;
+  height: 50rpx;
+  font-size: 28rpx;
+  border-radius: 15rpx;
+}
+
+
+.candidate2-name{
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow:ellipsis;
+  margin-left: 5%;
+  color: #737373;
+}
+.w70{
+  width: 70%;
+}
+.candidate2-time{
+  padding-top: 20rpx;
+  font-size: 28rpx;
+}
+
+.candidate2-cover{
+  width: 15vw;
+  height: 15vw;
+  border-radius: 20rpx;
+  margin-left: 3%;
+}
+.candidate2-cover-img{
+  width: 100%;
+  height: 100%;
+  border-radius: 20rpx;
+}

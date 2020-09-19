@@ -1,0 +1,5 @@
+/* pages/vote/xiangqin.wxss */
+@import "/css/input.wxss";
+page{
+  background-color: #fff;
+}

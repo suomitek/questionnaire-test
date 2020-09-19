@@ -1,0 +1,20 @@
+<!--pages/templates/votelist/votelist.wxml-->
+<template name='vote_list'>
+  <view bindtap='maskShow' data-id="{{id}}" data-index="{{index}}" data-type="type" class='singlBox'>
+    <view class='imageBox'>
+      <image src='{{host}}{{covers[0]}}'></image>
+    </view>
+    <view class='jobMesBox'>
+      <view class='name'>{{name}}</view>
+      <view class='schedule' wx:if="{{schedule == 'weikaishi'}}"><text class='weikaishi'>◉</text>未开始</view>
+      <view class='schedule' wx:elif="{{schedule == 'jinxingzhong'}}"><text class='jinxingzhong'>◉</text>进行中</view>
+      <view class='schedule' wx:elif="{{schedule == 'zanting'}}"><text class='zanting'>◉</text>暂停</view>
+      <view class='schedule' wx:else><text class='yijieshu'>◉</text>已结束</view>
+      <view class='time'>{{createTimeStr}}</view>
+    </view>
+    <view class='monDateBox'>
+      <view class='supNum'>{{supNum}}</view>
+      <view class='supNumTitle'>投票人数</view>
+    </view>
+  </view>
+</template>

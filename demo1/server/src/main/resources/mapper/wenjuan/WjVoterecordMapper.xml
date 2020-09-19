@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjVoterecordMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjVoterecord" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="wxUserId" property="wxUserId" jdbcType="BIGINT" />
+    <result column="voteId" property="voteId" jdbcType="BIGINT" />
+    <result column="candidateId" property="candidateId" jdbcType="BIGINT" />
+    <result column="comment" property="comment" jdbcType="VARCHAR" />
+    <result column="useless" property="useless" jdbcType="BIGINT" />
+    <result column="fabulous" property="fabulous" jdbcType="BIGINT" />
+    <result column="ipAddress" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="streetNumber" property="streetNumber" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id, state, createTime,
+      wxUserId, candidateId, comment,
+      useless, fabulous, ipAddress,
+      province, city, district,
+      street, streetNumber, latitude,
+      longitude,voteId
+  </sql>
+  <sql id="Base_name" >
+    wj_voterecord
+  </sql>
+  <sql id="orderAttr" >
+    id
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjVoterecord" keyProperty="id" useGeneratedKeys="true">
+    insert into wj_voterecord (id, state, createTime, 
+      wxUserId, candidateId, comment, 
+      useless, fabulous, ipAddress, 
+      province, city, district, 
+      street, streetNumber, latitude, 
+      longitude,voteId)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{wxUserId,jdbcType=BIGINT}, #{candidateId,jdbcType=BIGINT}, #{comment,jdbcType=VARCHAR}, 
+      #{useless,jdbcType=BIGINT}, #{fabulous,jdbcType=BIGINT}, #{ipAddress,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, 
+      #{street,jdbcType=VARCHAR}, #{streetNumber,jdbcType=VARCHAR}, #{latitude,jdbcType=VARCHAR}, 
+      #{longitude,jdbcType=VARCHAR},#{voteId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjVoterecord" >
+    update <include refid="Base_name" />
+    set state = #{state,jdbcType=INTEGER},
+    candidateId = #{candidateId,jdbcType=BIGINT}, comment = #{comment,jdbcType=VARCHAR},
+    useless = #{useless,jdbcType=BIGINT}, fabulous = #{fabulous,jdbcType=BIGINT}, ipAddress = #{ipAddress,jdbcType=VARCHAR},
+    province = #{province,jdbcType=VARCHAR}, city = #{city,jdbcType=VARCHAR}, district = #{district,jdbcType=VARCHAR},
+    street = #{street,jdbcType=VARCHAR}, streetNumber = #{streetNumber,jdbcType=VARCHAR}, latitude = #{latitude,jdbcType=VARCHAR},
+    longitude = #{longitude,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--ip-->
+  <select id="listWxUserIdByIpAddressVoteId" resultType="java.lang.String" >
+    select distinct wxUserId
+    from <include refid="Base_name" />
+    where state = 1
+    and ipAddress = #{ipAddress,jdbcType=VARCHAR}
+    and voteId = #{voteId,jdbcType=VARCHAR}
+  </select>
+  <!--今日-->
+  <select id="listDayRecordByWxUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+
+    SELECT  <include refid="Base_Column_List" />
+    FROM <include refid="Base_name" />
+
+    WHERE state = 1
+    and DATE(createTime) = CURDATE()
+    and wxUserId = #{wxUserId,jdbcType=BIGINT}
+  </select>
+
+
+
+  <update id="deleteByVoteId">
+    update <include refid="Base_name" />
+    set
+    state =0
+    where voteId = #{voteId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" />
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+</mapper>

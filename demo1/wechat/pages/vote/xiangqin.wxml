@@ -1,0 +1,97 @@
+<!--pages/vote/xiangqin.wxml-->
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>投票名称</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{thisVoteVo.name}}
+  </view>
+</view>
+<view class='input-show-group' wx:if="{{thisVoteVo.sponsor==1}}">
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/zhubanfang_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>主办方信息</view>
+  </view>
+  <view class='input-show-group-content' >
+    {{thisVoteVo.sponsorName}}
+  </view>
+  <view class='input-show-group-phone' style='padding-top: 15rpx;' bindtap='call' data-phone='{{thisVoteVo.sponsorPhone}}' data-name='{{thisVoteVo.sponsorName}}'>
+    <view class='input-show-group-phone-left'>{{thisVoteVo.sponsorPhone}}</view>
+    <view class='input-show-group-phone-rigth'>
+      <image src='../../imgs/add/phone_icon.png' class='tip-icon'></image>
+    </view>
+  </view>
+</view>
+
+<view class='input-show-group'  wx:if="{{thisVoteVo.outside==1}}">
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/baoming_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>候选项报名</view>
+  </view>
+  <view class='input-show-group-content'>
+    <text decode="true">截止到活动开始,开方报名</text>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/guize_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>投票规则</view>
+  </view>
+  <view class='input-show-group-content'>
+    <text decode="true" wx:if="{{thisVoteVo.repeatFlag==1}}">重复多日投票,每日每人&nbsp;{{thisVoteVo.frequency}}&nbsp;票\n</text>
+    <text decode="true" wx:if="{{thisVoteVo.repeatFlag==0}}">活动期间每人&nbsp;{{thisVoteVo.frequency}}&nbsp;票\n</text>
+    <text decode="true" wx:if="{{thisVoteVo.restrictFlag==0}}">不限制地区IP</text>
+    <text decode="true" wx:if="{{thisVoteVo.restrictFlag==1}}">仅限&nbsp;{{thisVoteVo.province}}{{thisVoteVo.city!="不限"?thisVoteVo.district!="不限"?'-'+thisVoteVo.city+'-'+thisVoteVo.district:'-'+thisVoteVo.city:''}}&nbsp;地区
+    </text>
+    <text decode="true" wx:if="{{thisVoteVo.restrictFlag==1}}">每个IP仅限&nbsp;{{thisVoteVo.ipWxUserFrequency}}&nbsp;个微信号
+    </text>
+    <text decode="true" wx:if="{{thisVoteVo.comment==1}}">\n投票后可为选项评论一次
+    </text>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>投票时间</view>
+  </view>
+  <view class='input-show-group-content'>
+    <text decode="true">{{thisVoteVo.startTimeStr}} &nbsp;&nbsp;至&nbsp;&nbsp;{{thisVoteVo.endTimeStr}}</text>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>投票介绍文字</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{thisVoteVo.introduce}}
+  </view>
+</view>
+<view class='img-show-group' wx:if="{{thisVoteVo.imgIntroduces.length>0}}">
+  <block wx:for="{{thisVoteVo.imgIntroduces}}" wx:for-item="item" wx:key='index' >
+    <image src='{{host+item}}' mode="widthFix" class='img-show'></image>
+  </block>
+</view>
+
+<view class='input-show-group' wx:if="{{thisVoteVo.reward==1}}">
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>奖励介绍</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{thisVoteVo.rewardDesc}}
+  </view>
+</view>
+<view class='img-show-group' wx:if="{{thisVoteVo.reward==1 && thisVoteVo.rewarImgs.length>0}}" style="margin-bottom: -10rpx;">
+  <block wx:for="{{thisVoteVo.rewarImgs}}" wx:for-item="item" wx:key='index' >
+    <image src='{{host+item}}' mode="widthFix" class='img-show'></image>
+  </block>
+</view>
+
+
+

@@ -1,0 +1,70 @@
+<!--pages/vote/xiangqin.wxml-->
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>问卷名称</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{setting.name}}
+  </view>
+</view>
+<view class='input-show-group' wx:if="{{setting.sponsor==1}}">
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/zhubanfang_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>主办方信息</view>
+  </view>
+  <view class='input-show-group-content' >
+    {{setting.sponsorName}}
+  </view>
+  <view class='input-show-group-phone' style='padding-top: 15rpx;' bindtap='call' data-phone='{{setting.sponsorPhone}}' data-name='{{setting.sponsorName}}'>
+    <view class='input-show-group-phone-left'>{{setting.sponsorPhone}}</view>
+    <view class='input-show-group-phone-rigth'>
+      <image src='../../imgs/add/phone_icon.png' class='tip-icon'></image>
+    </view>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/guize_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>答题规则</view>
+  </view>
+  <view class='input-show-group-content'>
+    <text decode="true">活动期间每人&nbsp;1&nbsp;次答题\n</text>
+    <text decode="true" wx:if="{{setting.restrictFlag==0}}">不限制地区IP</text>
+    <text decode="true" wx:if="{{setting.restrictFlag==1}}">仅限&nbsp;{{setting.province}}{{setting.city!="不限"?setting.district!="不限"?'-'+setting.city+'-'+setting.district:'-'+setting.city:''}}&nbsp;地区
+    </text>
+    <text decode="true" wx:if="{{setting.restrictFlag==1}}">每个IP仅限&nbsp;{{setting.ipWxUserFrequency}}&nbsp;个微信号 </text>
+    <text decode="true" wx:if="{{setting.comment==1}}">\n答题后可为选项评论一次
+    </text>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>答题时间</view>
+  </view>
+  <view class='input-show-group-content'>
+    <text decode="true">{{setting.startTimeStr}} &nbsp;&nbsp;至&nbsp;&nbsp;{{setting.endTimeStr}}</text>
+  </view>
+</view>
+
+<view class='input-show-group'>
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>答题介绍</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{setting.introduce}}
+  </view>
+</view>
+<view class='img-show-group' wx:if="{{setting.imgIntroduce.length>0}}">
+  <block wx:for="{{setting.imgIntroduce}}" wx:for-item="item" wx:key='index' >
+    <image src='{{host+item}}' mode="widthFix" class='img-show'></image>
+  </block>
+</view>
+
+
+

@@ -1,0 +1,190 @@
+/**app.wxss**/
+page{
+  background-color: #f3f3f3;
+}
+.hide{
+  display: none;
+}
+.dixian {
+  width: 100%;
+  height: 31px;
+  font-size: 12pt;
+  line-height: 31px;
+  color: #8f8f8f;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.dixian text{
+  background-color: #fff;
+  z-index: 2;
+  padding: 0 10px;
+}
+/* 透明渐变 - color - transparent */
+.dixian .line {
+  width: 100%;
+  border: 0;
+  height: 1rpx;
+  margin-top: -16px; 
+  z-index: 1;
+  background-image: linear-gradient(to right, rgba(133, 131, 131, 0), rgba(133, 131, 131, 0.7), rgba(133, 131, 131, 0));
+}
+
+::-webkit-scrollbar{
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+/* 背景渐变动画的按钮 */
+.btnBg{
+  /* background:linear-gradient(to top right, #12cadb 0%, #1262db 50%, #12cadb 100%); */
+  /* background: radial-gradient(ellipse at 50%, #1262db 30%, #12cadb 100%); */
+  border-radius: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  animation: bg-color 3.5s infinite;
+  /* -webkit-animation: bg-color 1s infinite; */
+
+}
+.btnBgRed{
+  border-radius: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  animation: bg-color-red 3.5s infinite;
+}
+
+
+@keyframes bg-color-red {
+0% {background: radial-gradient(ellipse at 0%, #f00 30%, #f6a3a3 100%);}
+2% {background: radial-gradient(ellipse at 4%, #f00 30%, #f6a3a3 100%);}
+4% {background: radial-gradient(ellipse at 8%, #f00 30%, #f6a3a3 100%);}
+6% {background: radial-gradient(ellipse at 12%, #f00 30%, #f6a3a3 100%);}
+8% {background: radial-gradient(ellipse at 16%, #f00 30%, #f6a3a3 100%);}
+10% {background: radial-gradient(ellipse at 20%, #f00 30%, #f6a3a3 100%);}
+12% {background: radial-gradient(ellipse at 24%, #f00 30%, #f6a3a3 100%);}
+14% {background: radial-gradient(ellipse at 28%, #f00 30%, #f6a3a3 100%);}
+16% {background: radial-gradient(ellipse at 32%, #f00 30%, #f6a3a3 100%);}
+18% {background: radial-gradient(ellipse at 36%, #f00 30%, #f6a3a3 100%);}
+20% {background: radial-gradient(ellipse at 40%, #f00 30%, #f6a3a3 100%);}
+22% {background: radial-gradient(ellipse at 44%, #f00 30%, #f6a3a3 100%);}
+24% {background: radial-gradient(ellipse at 48%, #f00 30%, #f6a3a3 100%);}
+26% {background: radial-gradient(ellipse at 52%, #f00 30%, #f6a3a3 100%);}
+28% {background: radial-gradient(ellipse at 56%, #f00 30%, #f6a3a3 100%);}
+30% {background: radial-gradient(ellipse at 60%, #f00 30%, #f6a3a3 100%);}
+32% {background: radial-gradient(ellipse at 64%, #f00 30%, #f6a3a3 100%);}
+34% {background: radial-gradient(ellipse at 68%, #f00 30%, #f6a3a3 100%);}
+36% {background: radial-gradient(ellipse at 72%, #f00 30%, #f6a3a3 100%);}
+38% {background: radial-gradient(ellipse at 76%, #f00 30%, #f6a3a3 100%);}
+40% {background: radial-gradient(ellipse at 80%, #f00 30%, #f6a3a3 100%);}
+42% {background: radial-gradient(ellipse at 84%, #f00 30%, #f6a3a3 100%);}
+44% {background: radial-gradient(ellipse at 88%, #f00 30%, #f6a3a3 100%);}
+46% {background: radial-gradient(ellipse at 92%, #f00 30%, #f6a3a3 100%);}
+48% {background: radial-gradient(ellipse at 96%, #f00 30%, #f6a3a3 100%);}
+50% {background: radial-gradient(ellipse at 100%, #f00 30%, #f6a3a3 100%);}
+52% {background: radial-gradient(ellipse at 96%, #f00 30%, #f6a3a3 100%);}
+54% {background: radial-gradient(ellipse at 92%, #f00 30%, #f6a3a3 100%);}
+56% {background: radial-gradient(ellipse at 88%, #f00 30%, #f6a3a3 100%);}
+58% {background: radial-gradient(ellipse at 84%, #f00 30%, #f6a3a3 100%);}
+60% {background: radial-gradient(ellipse at 80%, #f00 30%, #f6a3a3 100%);}
+62% {background: radial-gradient(ellipse at 76%, #f00 30%, #f6a3a3 100%);}
+64% {background: radial-gradient(ellipse at 72%, #f00 30%, #f69696 100%);}
+66% {background: radial-gradient(ellipse at 68%, #f00 30%, #f6a3a3 100%);}
+68% {background: radial-gradient(ellipse at 64%, #f00 30%, #f6a3a3 100%);}
+70% {background: radial-gradient(ellipse at 60%, #f00 30%, #f6a3a3 100%);}
+72% {background: radial-gradient(ellipse at 56%, #f00 30%, #f6a3a3 100%);}
+74% {background: radial-gradient(ellipse at 52%, #f00 30%, #f6a3a3 100%);}
+76% {background: radial-gradient(ellipse at 48%, #f00 30%, #f6a3a3 100%);}
+78% {background: radial-gradient(ellipse at 44%, #f00 30%, #f6a3a3 100%);}
+80% {background: radial-gradient(ellipse at 40%, #f00 30%, #f6a3a3 100%);}
+82% {background: radial-gradient(ellipse at 36%, #f00 30%, #f6a3a3 100%);}
+84% {background: radial-gradient(ellipse at 32%, #f00 30%, #f6a3a3 100%);}
+86% {background: radial-gradient(ellipse at 28%, #f00 30%, #f6a3a3 100%);}
+88% {background: radial-gradient(ellipse at 24%, #f00 30%, #f6a3a3 100%);}
+90% {background: radial-gradient(ellipse at 20%, #f00 30%, #f6a3a3 100%);}
+92% {background: radial-gradient(ellipse at 16%, #f00 30%, #f6a3a3 100%);}
+94% {background: radial-gradient(ellipse at 12%, #f00 30%, #f6a3a3 100%);}
+96% {background: radial-gradient(ellipse at 8%, #f00 30%, #f6a3a3 100%);}
+98% {background: radial-gradient(ellipse at 4%, #f00 30%, #f6a3a3 100%);}
+100% {background: radial-gradient(ellipse at 0%, #f00 30%, #f6a3a3 100%);}
+}
+
+
+@keyframes bg-color {
+ 0% {background: radial-gradient(ellipse at 0%, #1262db 30%, #12cadb 100%);}
+2% {background: radial-gradient(ellipse at 4%, #1262db 30%, #12cadb 100%);}
+4% {background: radial-gradient(ellipse at 8%, #1262db 30%, #12cadb 100%);}
+6% {background: radial-gradient(ellipse at 12%, #1262db 30%, #12cadb 100%);}
+8% {background: radial-gradient(ellipse at 16%, #1262db 30%, #12cadb 100%);}
+10% {background: radial-gradient(ellipse at 20%, #1262db 30%, #12cadb 100%);}
+12% {background: radial-gradient(ellipse at 24%, #1262db 30%, #12cadb 100%);}
+14% {background: radial-gradient(ellipse at 28%, #1262db 30%, #12cadb 100%);}
+16% {background: radial-gradient(ellipse at 32%, #1262db 30%, #12cadb 100%);}
+18% {background: radial-gradient(ellipse at 36%, #1262db 30%, #12cadb 100%);}
+20% {background: radial-gradient(ellipse at 40%, #1262db 30%, #12cadb 100%);}
+22% {background: radial-gradient(ellipse at 44%, #1262db 30%, #12cadb 100%);}
+24% {background: radial-gradient(ellipse at 48%, #1262db 30%, #12cadb 100%);}
+26% {background: radial-gradient(ellipse at 52%, #1262db 30%, #12cadb 100%);}
+28% {background: radial-gradient(ellipse at 56%, #1262db 30%, #12cadb 100%);}
+30% {background: radial-gradient(ellipse at 60%, #1262db 30%, #12cadb 100%);}
+32% {background: radial-gradient(ellipse at 64%, #1262db 30%, #12cadb 100%);}
+34% {background: radial-gradient(ellipse at 68%, #1262db 30%, #12cadb 100%);}
+36% {background: radial-gradient(ellipse at 72%, #1262db 30%, #12cadb 100%);}
+38% {background: radial-gradient(ellipse at 76%, #1262db 30%, #12cadb 100%);}
+40% {background: radial-gradient(ellipse at 80%, #1262db 30%, #12cadb 100%);}
+42% {background: radial-gradient(ellipse at 84%, #1262db 30%, #12cadb 100%);}
+44% {background: radial-gradient(ellipse at 88%, #1262db 30%, #12cadb 100%);}
+46% {background: radial-gradient(ellipse at 92%, #1262db 30%, #12cadb 100%);}
+48% {background: radial-gradient(ellipse at 96%, #1262db 30%, #12cadb 100%);}
+50% {background: radial-gradient(ellipse at 100%, #1262db 30%, #12cadb 100%);}
+52% {background: radial-gradient(ellipse at 96%, #1262db 30%, #12cadb 100%);}
+54% {background: radial-gradient(ellipse at 92%, #1262db 30%, #12cadb 100%);}
+56% {background: radial-gradient(ellipse at 88%, #1262db 30%, #12cadb 100%);}
+58% {background: radial-gradient(ellipse at 84%, #1262db 30%, #12cadb 100%);}
+60% {background: radial-gradient(ellipse at 80%, #1262db 30%, #12cadb 100%);}
+62% {background: radial-gradient(ellipse at 76%, #1262db 30%, #12cadb 100%);}
+64% {background: radial-gradient(ellipse at 72%, #1262db 30%, #12cadb 100%);}
+66% {background: radial-gradient(ellipse at 68%, #1262db 30%, #12cadb 100%);}
+68% {background: radial-gradient(ellipse at 64%, #1262db 30%, #12cadb 100%);}
+70% {background: radial-gradient(ellipse at 60%, #1262db 30%, #12cadb 100%);}
+72% {background: radial-gradient(ellipse at 56%, #1262db 30%, #12cadb 100%);}
+74% {background: radial-gradient(ellipse at 52%, #1262db 30%, #12cadb 100%);}
+76% {background: radial-gradient(ellipse at 48%, #1262db 30%, #12cadb 100%);}
+78% {background: radial-gradient(ellipse at 44%, #1262db 30%, #12cadb 100%);}
+80% {background: radial-gradient(ellipse at 40%, #1262db 30%, #12cadb 100%);}
+82% {background: radial-gradient(ellipse at 36%, #1262db 30%, #12cadb 100%);}
+84% {background: radial-gradient(ellipse at 32%, #1262db 30%, #12cadb 100%);}
+86% {background: radial-gradient(ellipse at 28%, #1262db 30%, #12cadb 100%);}
+88% {background: radial-gradient(ellipse at 24%, #1262db 30%, #12cadb 100%);}
+90% {background: radial-gradient(ellipse at 20%, #1262db 30%, #12cadb 100%);}
+92% {background: radial-gradient(ellipse at 16%, #1262db 30%, #12cadb 100%);}
+94% {background: radial-gradient(ellipse at 12%, #1262db 30%, #12cadb 100%);}
+96% {background: radial-gradient(ellipse at 8%, #1262db 30%, #12cadb 100%);}
+98% {background: radial-gradient(ellipse at 4%, #1262db 30%, #12cadb 100%);}
+100% {background: radial-gradient(ellipse at 0%, #1262db 30%, #12cadb 100%);}
+}
+
+
+
+
+
+/*swtich整体大小及背景色*/
+.wx-switch-input{
+    /* width:82rpx !important;
+    height:36rpx !important; */
+    background: #1296db !important;
+    border: #1296db solid 1rpx!important; /* 重置开关边框颜色 */
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before{
+    /* width:82rpx !important;
+    height: 36rpx !important; */
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after{
+    /* width: 40rpx !important;
+    height: 36rpx !important; */
+}

@@ -1,0 +1,26 @@
+<!--pages/voteList/voteList.wxml-->
+<import src="../templates/votelist2/votelist2.wxml" />
+
+<view class="background_view">
+</view>
+
+<swiper class='lunbo' catchtap='carouselToDetail'  indicator-dots='true' autoplay='true' interval='5000' duration='1000' circular='true' style='opacity: {{divheigth/(moveheigth+divheigth)}};'>
+  <block wx:for="{{banners}}" wx:for-index="index" wx:key='{{idnex}}'>
+    <swiper-item bindtap="goto" data-url='{{item.linkUrl}}'>
+      <image src='{{host+item.imagePath}}' class='lunbo-img' mode='aspectFill'></image>
+    </swiper-item>
+  </block>
+</swiper>
+
+
+
+<view class='voteList'>
+  <block wx:for="{{voteVos}}" wx:for-item="item" wx:key='index' >
+    <template is="vote_list" data="{{...item,host,index}}" />
+  </block>
+</view>
+
+<view class="dixian" wx:if="{{fengye.draw > fengReturn.pageNum}}">
+    <text >我也是有底线的</text>
+    <view class="line"></view>
+</view>

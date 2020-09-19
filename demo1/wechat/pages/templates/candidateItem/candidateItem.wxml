@@ -1,0 +1,59 @@
+<!--pages/templates/candidateItem/candidateItem.wxml-->
+<template name='cand_list'>
+  <view class="touch-item {{isTouchMove ? 'touch-move-active' : ''}}" data-index="{{index}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtap='editCandidate' style='{{index==0?"border-top:1px solid #bfbfbf;":""}}'>
+    <view class="cand-content">
+      <view class="cand-content-top">
+        <view class="cand-content-top-item">
+          {{createTimeStr}}
+        </view>
+        <view class="cand-content-top-item">
+          得票:<text class='piao'>{{supNum}}</text>
+        </view>
+        <view class="cand-content-top-item">
+          <view class='yitongguo' wx:if='{{useFlag==1}}'>已通过</view>
+          <view class='shenghezhong' wx:if='{{useFlag==0}}'>审核中</view>
+          <view class='weitongguo' wx:if='{{useFlag==-1}}'>未通过</view>
+        </view>
+      </view>
+      <!-- 图片 -->
+      <view class="cand-content-bottom" wx:if="{{voteType==0}}">
+        <view class="cand-content-bottom-imgObj">
+          <image src="{{host+cover}}" class="cand-content-bottom-img"></image>
+        </view>
+        <view class="cand-content-bottom-text2">
+          <view class="cand-content-bottom-text-title">
+           <text wx:if="{{orderNum!=0}}">{{orderNum}}号选手</text>{{name}}
+          </view>
+        </view>
+      </view>
+       <!-- 文字 -->
+      <view class="cand-content-bottom" wx:if="{{voteType==1}}">
+        <view class="cand-content-bottom-text">
+          <view class="cand-content-bottom-text-title">
+            <text wx:if="{{orderNum!=0}}">{{orderNum}}号选手</text>{{name}}
+          </view>
+          <view class="cand-content-bottom-text-desc">
+           {{introduce}}
+           </view>
+        </view>
+      </view>
+      <!-- 图文 -->
+      <view class="cand-content-bottom" wx:if="{{voteType==2}}">
+        <view class="cand-content-bottom-imgObj">
+          <image src="{{host+cover}}" class="cand-content-bottom-img"></image>
+        </view>
+        <view class="cand-content-bottom-text">
+          <view class="cand-content-bottom-text-title">
+            <text wx:if="{{orderNum!=0}}">{{orderNum}}号选手</text>{{name}}
+          </view>
+          <view class="cand-content-bottom-text-desc">
+           {{introduce}}
+           </view>
+        </view>
+      </view>
+    </view>
+    <view class="del" catchtap="del" data-index="{{index}}">删除</view>
+  </view>
+</template>
+
+

@@ -1,0 +1,28 @@
+<!--pages/my/lishi/lishi.wxml-->
+<import src="../../templates/votelist/votelist.wxml" />
+<import src="../../templates/questionlist/questionlist.wxml" />
+<view class="page">
+  <view class="headerTab">
+    <block wx:for="{{swiperTitle}}" wx:key="">
+      <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
+      bindtap="turnPage">{{item.text}}</view>
+    </block> 
+  </view>
+  
+  <view class='tab-box'>
+    <view class="list-box {{currentPage == 0 ? '' : 'hide'}}">
+      <view class='voteList'>
+        <block wx:for="{{voteList}}" wx:for-item="item" wx:key='index' >
+          <template is="vote_list" data="{{...item,host,index}}" />
+        </block>
+      </view>
+    </view>
+    <view class="list-box {{currentPage == 1 ? '' : 'hide'}}">
+      <view class='voteList'>
+        <block wx:for="{{questionList}}" wx:for-item="item" wx:key='index' >
+          <template is="question_list" data="{{...item,host,index}}" />
+        </block>
+      </view>
+    </view>
+  </view>
+</view>

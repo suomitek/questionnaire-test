@@ -1,0 +1,6 @@
+/* pages/edit/editwenjuan/editwenjuan.wxss */
+@import "/css/input.wxss";
+@import "/css/setting.wxss";
+page{
+  background-color: #fff;
+}

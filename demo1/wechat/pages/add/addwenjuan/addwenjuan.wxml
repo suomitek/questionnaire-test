@@ -1,0 +1,316 @@
+<!--pages/add/addwenjuan/addwenjuan.wxml-->
+<import src="/pages/templates/question/xuanze.wxml" />
+<import src="/pages/templates/question/wenben.wxml" />
+<import src="/pages/templates/question/pingfen.wxml" />
+<import src="/pages/templates/question/wenjian.wxml" />
+<import src="/pages/templates/question/location.wxml" />
+<view class='schedules'>
+  <block wx:for="{{scheduleList}}" wx:for-item="item" wx:key='index' >
+    <view class="link {{index<=currentschedule?'textactivate':'textunactivate'}}" wx:if="{{index!=0}}">---</view>
+    <view class='schedule'>
+      <view class='schedule-icon'>
+        <text class="icon {{index<=currentschedule?'bgactivate':'bgunactivate'}}">{{index+1}}</text>
+      </view>
+      <view class="schedule-title {{index<=currentschedule?'textactivate':'textunactivate'}}">{{item.title}}</view>
+    </view>
+  </block>
+</view>
+
+<view class='tab-box'>
+
+  <view class="list-box {{currentschedule == 0 ? '' : 'hide'}}">
+    <view class='cover'>
+      <image src='{{setting.cover[0] == ""?"../../../imgs/fengmian.png":host+setting.cover[0]}}' class='fengmian'></image>
+      <view class='img-up-btn' bindtap="previewImage" data-count='1' data-index='0' data-attr='cover' >自定义封面  </view>
+    </view>
+    <view class='input-group'> 
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>问卷名称</view>
+        </view>
+        <view class='tip-switch-right'>
+          <input maxlength="20" value='{{setting.name}}' data-attr='name' bindinput="bindKeyInput" placeholder="请输入问卷名称" placeholder-class="placeholderStyle" />
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip'>
+        <image src='../../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+        <view class='tip-title'>问卷介绍</view>
+      </view>
+      <view class='txt'>
+        <textarea placeholder='请输入问卷介绍' value='{{setting.introduce}}' data-attr='introduce' bindinput="bindKeyInput" placeholder-class="placeholderStyle" maxlength='1024'></textarea>
+      </view>
+    </view>
+
+    <view class='input-group' style=' border:none'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/tupian_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>图片介绍</view>
+        </view>
+        <view class='tip-switch-right'>
+          <view class='btnBg addBtn' bindtap="previewImage" data-count='1' data-index='-1' data-attr='imgIntroduce' >+</view>
+        </view>
+      </view>
+    </view>
+    <block wx:for="{{setting.imgIntroduce}}" wx:for-item="item" wx:key='index' >
+      <view class='img-group'>
+        <image src='{{host+item}}' mode="widthFix" class='img-group-Img'></image>
+        <view class='img-group-btns'>
+          <view class='img-group-edit' bindtap="previewImage" data-count='1' data-index='{{index}}' data-attr='imgIntroduce' 
+          data-surface="wj_vote" data-nature="imgIntroduce" >编辑</view>
+          <view class='img-group-del' bindtap="fileImgDelete" data-count='1' data-index='{{index}}' data-attr='imgIntroduce'
+          data-surface="wj_vote" data-nature="imgIntroduce" >删除</view>
+        </view>
+      </view>
+    </block>
+    <view class='line'></view>
+    <!--  -->
+    <view class='btn-group'>
+      <view class='btn btnBg' bindtap="turnSchedule1">
+          下一步
+      </view>
+    </view>
+  </view>
+
+  <view class="list-box {{currentschedule == 1 ? '' : 'hide'}}">
+    <view class="mask" bindtap="closeColorPicker" wx:if="{{setting.showColorPicker1}}">
+      <view class='color-picker-view' >
+        <color-picker data-id="1" class="color-picker" style='color: {{setting.themeColor}};' colorData="{{setting.colorData1}}" rpxRatio="{{setting.rpxRatio}}"
+                bindchangecolor="onChangeColor"></color-picker>
+      </view>
+      <view class="mask-close">x</view>
+    </view>
+
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>主题颜色</view>
+        </view>
+        <view class='tip-switch-right' data-id="1" bindtap="toggleColorPicker">
+          <view style="background:{{setting.themeColor}};height:50rpx;width:50rpx;"></view>
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>开始时间</view>
+        </view>
+        <view class='tip-switch-right multiSelector'>
+          <picker mode="multiSelector" value="{{setting.dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{setting.dateTimeArray}}">
+            <view class="tui-picker-detail"> {{setting.dateTimeArray[0][setting.dateTime[0]]}}-{{setting.dateTimeArray[1][setting.dateTime[1]]}}-{{setting.dateTimeArray[2][setting.dateTime[2]]}} {{setting.dateTimeArray[3][setting.dateTime[3]]}}:{{setting.dateTimeArray[4][setting.dateTime[4]]}}:{{setting.dateTimeArray[5][setting.dateTime[5]]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>结束时间</view>
+        </view>
+        <view class='tip-switch-right multiSelector'>
+          <picker mode="multiSelector" value="{{setting.dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{setting.dateTimeArray1}}">
+            <view class="tui-picker-detail"> {{setting.dateTimeArray1[0][setting.dateTime1[0]]}}-{{setting.dateTimeArray1[1][setting.dateTime1[1]]}}-{{setting.dateTimeArray1[2][setting.dateTime1[2]]}} {{setting.dateTimeArray1[3][setting.dateTime1[3]]}}:{{setting.dateTimeArray1[4][setting.dateTime1[4]]}}:{{setting.dateTimeArray1[5][setting.dateTime1[5]]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/didian_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>地区和IP限制</view>
+        </view>
+        <view class='tip-switch-right'>
+          <switch wx:if="{{setting.restrictFlag==0}}" bindchange="changeRrestrict"/>
+          <switch wx:if="{{setting.restrictFlag==1}}" checked bindchange="changeRrestrict"/>
+        </view>
+      </view>
+    </view>
+    <view class='input-group' hidden='{{setting.restrictFlag==0}}'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <view  class='tip-title'>地区限制</view>
+        </view>
+        <view class='tip-switch-right multiSelector'>
+          <picker mode="multiSelector" value="{{setting.thisCites}}" range="{{setting.citesSelects}}"  bindchange="changeCites" bindcolumnchange="changeCitesColumn">
+          {{setting.citesSelects[0][setting.thisCites[0]]}}-{{setting.citesSelects[1][setting.thisCites[1]]}}-{{setting.citesSelects[2][setting.thisCites[2]]}} 
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='input-group' hidden='{{setting.restrictFlag==0}}'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <view  class='tip-title'>同IP可答微信号数量</view>
+        </view>
+        <view class='tip-switch-right'>
+          <view class="number-group">
+            <button class="number-cell" bindtap="changeNum" data-min="1" data-max="10" data-flag='-1' data-attr='ipWxUserFrequency'>-</button>
+            <input class="number-cell" type="number" value='{{setting.ipWxUserFrequency}}'></input>
+            <button class="number-cell" bindtap="changeNum" data-min="1" data-max="10" data-flag='1' data-attr='ipWxUserFrequency'>+</button>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/bugongkai_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>是否公开</view>
+        </view>
+        <view class='tip-switch-right'>
+          <switch wx:if="{{setting.overt==0}}" bindchange="changeSwitch" data-attr='overt'/>
+          <switch wx:if="{{setting.overt==1}}" checked bindchange="changeSwitch" data-attr='overt'/>
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/pinglun_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>是否开启评论</view>
+        </view>
+        <view class='tip-switch-right'>
+          <switch wx:if="{{setting.comment==0}}" bindchange="changeSwitch" data-attr='comment'/>
+          <switch wx:if="{{setting.comment==1}}" checked bindchange="changeSwitch" data-attr='comment'/>
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/zhubanfang_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>主办方信息</view>
+        </view>
+        <view class='tip-switch-right'>
+          <switch wx:if="{{setting.sponsor==0}}" bindchange="changeSwitch" data-attr='sponsor'/>
+          <switch wx:if="{{setting.sponsor==1}}" checked bindchange="changeSwitch" data-attr='sponsor'/>
+        </view>
+      </view>
+    </view>
+    <view class='input-group' hidden='{{setting.sponsor==0}}'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <view  class='tip-title'>主办方名称</view>
+        </view>
+        <view class='tip-switch-right'>
+          <input maxlength="20"  value='{{setting.sponsorName}}' data-attr='sponsorName' bindinput="bindKeyInput"  placeholder="请输入主办方名称" placeholder-class="placeholderStyle" />
+        </view>
+      </view>
+    </view>
+    <view class='input-group' hidden='{{setting.sponsor==0}}'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <view class='tip-title'>主办方电话</view>
+        </view>
+        <view class='tip-switch-right'>
+          <input maxlength="20"  value='{{setting.sponsorPhone}}' data-attr='sponsorPhone' bindinput="bindKeyInput"  placeholder="请输入主办方电话" placeholder-class="placeholderStyle" />
+        </view>
+      </view>
+    </view>
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/zhubanfang_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>结果发送到邮箱</view>
+        </view>
+        <view class='tip-switch-right'>
+          <switch wx:if="{{setting.sendFlag!=1}}" bindchange="changeSwitch" data-attr='sendFlag'/>
+          <switch wx:if="{{setting.sendFlag==1}}" checked bindchange="changeSwitch" data-attr='sendFlag'/>
+        </view>
+      </view>
+    </view>
+    <view class='input-group' hidden='{{setting.sendFlag!=1}}'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <view  class='tip-title'>邮箱</view>
+        </view>
+        <view class='tip-switch-right'>
+          <input maxlength="20"  value='{{setting.mailbox}}' data-attr='mailbox' bindinput="bindKeyInput"  placeholder="请输入接收邮箱" placeholder-class="placeholderStyle" />
+        </view>
+      </view>
+    </view>
+    <view class='btn-group'>
+      <view class='btn btnBg' bindtap="turnSchedule0">
+          上一步
+      </view>
+      <view class='btn btnBg' bindtap="turnSchedule1">
+          下一步
+      </view>
+    </view>
+  </view>
+  <view class="list-box {{currentschedule == 2 ? '' : 'hide'}}">
+    <view class='input-group'>
+      <view class='tip-switch'>
+        <view class='tip-switch-left'>
+          <image src='../../../imgs/add/bugongkai_icon.png' class='tip-icon'></image>
+          <view class='tip-title'>考试试卷</view>
+        </view>
+        <view class='tip-switch-right'> 
+          <switch wx:if="{{setting.examineFlag==0}}" bindchange="changeSwitch" data-attr='examineFlag'/>
+          <switch wx:if="{{setting.examineFlag==1}}" checked bindchange="changeSwitch" data-attr='examineFlag'/>
+        </view>
+      </view>
+    </view>
+    
+    <block wx:for="{{wentis}}" wx:for-item="item" wx:key='index'>
+      <view class='bianji {{thisWenTi == index ? "liang" : "an"}}' style='width:{{}}'>
+        <view class='bianji-ti'>
+          <template is='{{item.qType}}' data="{{...item,index,host,model}}"/>
+          <view class='bianji-ge' bindtap='xuanti' data-index='{{index}}'></view>
+        </view>
+        <view class='btns' wx:if="{{thisWenTi == index}}" >
+          <view class='btn-i'  bindtap='bianji' data-qtype='{{item.qType}}'>
+            <image src='../../../imgs/add/bianji.png' class='bianjianniu'/>
+            <view class='btn-name'>编辑</view>
+          </view>
+          <view class='btn-i'  bindtap='fuzhi'>
+            <image src='../../../imgs/add/fuzhi.png' class='bianjianniu'/>
+            <view class='btn-name'>复制</view>
+          </view>
+          <view class='btn-i'  bindtap='shangyi'>
+            <image src='../../../imgs/add/shangyi.png' class='bianjianniu'/>
+            <view class='btn-name'>上移</view>
+          </view>
+          <view class='btn-i'  bindtap='xiayi'>
+            <image src='../../../imgs/add/xiayi.png' class='bianjianniu'/>
+            <view class='btn-name'>下移</view>
+          </view>
+          <view class='btn-i' bindtap='shanchu'>
+            <image src='../../../imgs/add/shanchu.png' class='bianjianniu'/>
+            <view class='btn-name'>删除</view>
+          </view> 
+        </view>
+      </view>
+      <!-- <view class='zhanwei' wx:if="{{wentis.length > index + 1}}"></view> -->
+    </block>
+    <view class='zhanwei'></view>
+    <view class='addbtns'>
+      <view class='addbtn' bindtap='questionType'>
+        +添加题目
+      </view>
+    </view>
+    <view class='zhanwei'></view>
+    <view class='btn-group'>
+      <view class='btn btnBg' bindtap="turnSchedule0">
+          上一步
+      </view>
+      <view class='btn btnBg' bindtap="yulan">
+        预览
+      </view>
+      <view class='btn btnBg' bindtap="fabu">
+        发布
+      </view>
+    </view>
+  </view>
+</view>

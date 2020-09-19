@@ -1,0 +1,33 @@
+<!--pages/templates/question/pingfen.wxml-->
+<template name='pingfen'>
+<view class='pingfen'>
+  <view class='timu'>
+    <view class='timu-left'>{{index+1}}.</view>
+    <view class='timu-right'>
+      <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+      <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+      <text class='bixuan' decode='true'>&nbsp;</text>
+     {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+     <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+    </view>
+  </view>
+  <view class='timucover' wx:if="{{cover.length >0}}">
+    <image src='{{host+cover[0]}}' mode="widthFix" class='timufengmian'></image>
+  </view>
+  <view class='pingfen-btns'>
+    <view class="pingfen-btn {{fen>=1?'on':''}}" wx:if="{{maxFen >=1}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="1">1</view>
+    <view class="pingfen-btn {{fen>=2?'on':''}}" wx:if="{{maxFen >=2}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="2">2</view>
+    <view class="pingfen-btn {{fen>=3?'on':''}}" wx:if="{{maxFen >=3}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="3">3</view>
+    <view class="pingfen-btn {{fen>=4?'on':''}}" wx:if="{{maxFen >=4}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="4">4</view>
+    <view class="pingfen-btn {{fen>=5?'on':''}}" wx:if="{{maxFen >=5}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="5">5</view>
+    <view class="pingfen-btn {{fen>=6?'on':''}}" wx:if="{{maxFen >=6}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="6">6</view>
+    <view class="pingfen-btn {{fen>=7?'on':''}}" wx:if="{{maxFen >=7}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="7">7</view>
+    <view class="pingfen-btn {{fen>=8?'on':''}}" wx:if="{{maxFen >=8}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="8">8</view>
+    <view class="pingfen-btn {{fen>=9?'on':''}}" wx:if="{{maxFen >=9}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="9">9</view>
+    <view class="pingfen-btn {{fen>=10?'on':''}}" wx:if="{{maxFen >=10}}" bindtap="pingfen" data-qid="{{id}}" data-index="{{index}}" data-fen="10">10</view>
+  </view>
+  <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+    {{errorMsg}}
+  </view>
+</view>
+</template>

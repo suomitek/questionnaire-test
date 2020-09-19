@@ -1,0 +1,17 @@
+<!--pages/add/addwenjuan/questionType.wxml-->
+<view class='yangshilist'>
+  <block wx:for="{{yangshis}}" wx:for-item="item" wx:key='index' >
+    <view class='yangshi' bindtap='tiaozhuan' data-qtype='{{item.qtype}}' data-type='{{index+1}}' >
+      <view class='yangshi_img'>
+        <image src='{{item.img}}' class='img'></image>
+      </view>
+      <view class='yangshi_title'>{{item.name}}</view>
+    </view>
+  </block>
+  <view class='yangshi' bindtap='piliang'>
+      <view class='yangshi_img'>
+        <image src='../../../imgs/type/danxuan.png' class='img'></image>
+      </view>
+      <view class='yangshi_title'>批量</view>
+    </view>
+</view>

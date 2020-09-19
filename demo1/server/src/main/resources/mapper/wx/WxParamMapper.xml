@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wx.dao.WxParamMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wx.entity.WxParam" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="projectType" property="projectType" jdbcType="INTEGER" />
+    <result column="appSecret" property="appSecret" jdbcType="VARCHAR" />
+    <result column="appId" property="appId" jdbcType="VARCHAR" />
+    <result column="mchId" property="mchId" jdbcType="VARCHAR" />
+    <result column="accessToken" property="accessToken" jdbcType="VARCHAR" />
+    <result column="mchKey" property="mchKey" jdbcType="VARCHAR" />
+    <result column="keyPath" property="keyPath" jdbcType="VARCHAR" />
+    <result column="mpAppId" property="mpAppId" jdbcType="VARCHAR" />
+    <result column="mpAppSecret" property="mpAppSecret" jdbcType="VARCHAR" />
+    <result column="mpMchId" property="mpMchId" jdbcType="VARCHAR" />
+    <result column="mpMchKey" property="mpMchKey" jdbcType="VARCHAR" />
+    <result column="mpAccessToken" property="mpAccessToken" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, state, createTime,
+      projectType, appSecret, appId,
+      mchId, accessToken, mchKey,
+      keyPath, mpAppId, mpAppSecret,
+      mpMchId, mpMchKey, mpAccessToken
+  </sql>
+  <sql id="Base_name" >
+    wx_param
+  </sql>
+
+  <insert id="insert" parameterType="cn.csl.wx.entity.WxParam" >
+    insert into wx_param (id, state, createTime, 
+      projectType, appSecret, appId,
+      mchId, accessToken, mchKey,
+      keyPath, mpAppId, mpAppSecret, 
+      mpMchId, mpMchKey, mpAccessToken
+      )
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{projectType,jdbcType=INTEGER}, #{appSecret,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+      #{mchId,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR}, #{mchKey,jdbcType=VARCHAR},
+      #{keyPath,jdbcType=VARCHAR}, #{mpAppId,jdbcType=VARCHAR}, #{mpAppSecret,jdbcType=VARCHAR}, 
+      #{mpMchId,jdbcType=VARCHAR}, #{mpMchKey,jdbcType=VARCHAR}, #{mpAccessToken,jdbcType=VARCHAR}
+      )
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wx.entity.WxParam" >
+    update <include refid="Base_name" />
+    set
+    projectType=#{projectType,jdbcType=INTEGER},
+    appSecret=#{appSecret,jdbcType=VARCHAR},
+    appId=#{appId,jdbcType=VARCHAR},
+    mchId=#{mchId,jdbcType=VARCHAR},
+    accessToken=#{accessToken,jdbcType=VARCHAR},
+    mchKey=#{mchKey,jdbcType=VARCHAR},
+    keyPath=#{keyPath,jdbcType=VARCHAR},
+    mpAppId=#{mpAppId,jdbcType=VARCHAR},
+    mpAppSecret=#{mpAppSecret,jdbcType=VARCHAR},
+    mpMchId=#{mpMchId,jdbcType=VARCHAR},
+    mpMchKey=#{mpMchKey,jdbcType=VARCHAR},
+    mpAccessToken=#{mpAccessToken,jdbcType=VARCHAR},
+    state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = 1
+  </select>
+</mapper>

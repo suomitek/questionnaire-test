@@ -1,0 +1,66 @@
+<!--pages/templates/question/wenben.wxml-->
+<template name='tiankong'>
+<view class='xuanzeti'>
+  <view class='timu'>
+    <view class='timu-left'>{{index+1}}.</view>
+    <view class='timu-right'>
+      <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+      <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+      <text class='bixuan' decode='true'>&nbsp;</text>
+      {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+      <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+    </view>
+  </view>
+  <view class='timucover' wx:if="{{cover.length >0}}">
+    <image src='{{host+cover[0]}}' mode="widthFix" class='timufengmian'></image>
+  </view>
+  <view class='shurukuang' wx:if="{{model != 'bianji'}}">
+    <view class='shurukuang-icon'>
+      <image src='{{model!="bianji"?"":"../"}}../../imgs/wenben/{{checkType}}.png' mode="widthFix" wx:if="{{checkType!='buxian'}}"></image>
+    </view>
+    <view class='shurukuang-input'>
+      <input maxlength="20" data-attr='name' bindinput="bindKeyInput" placeholder="请输入答案" placeholder-class="placeholderStyle2"  data-qid="{{id}}" data-index="{{index}}" value='{{answer}}'/>
+    </view>
+  </view>
+  <view class='shurukuang' wx:if="{{model == 'bianji'}}">
+    <view class='shurukuang-icon'>
+      <image src='../../../imgs/wenben/{{checkType}}.png' mode="widthFix" wx:if="{{checkType!='buxian'}}"></image>
+    </view>
+    <view class='shurukuang-input'>
+      <view style='width:100%'>请输入答案</view>
+    </view>
+  </view>
+  <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+    {{errorMsg}}
+  </view>
+</view>
+</template>
+
+<template name='jianda'>
+<view class='xuanzeti'>
+  <view class='timu'>
+    <view class='timu-left'>{{index+1}}.</view>
+    <view class='timu-right'>
+      <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+      <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+      <text class='bixuan' decode='true'>&nbsp;</text>
+      {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+      <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+    </view>
+  </view>
+  <view class='timucover' wx:if="{{cover.length >0}}">
+    <image src='{{host+cover[0]}}' mode="widthFix" class='timufengmian'></image>
+  </view>
+  <view class='shurukuang' wx:if="{{model != 'bianji'}}">
+    <textarea placeholder='请输入答案' style='height: {{lineNumber*35}}rpx;' data-attr='introduce' bindinput="bindKeyInput" placeholder-class="placeholderStyle2" maxlength='{{lineNumber*20}}'  data-qid="{{id}}" data-index="{{index}}" value='{{answer}}'></textarea>
+  </view>
+  <view class='shurukuang' wx:if="{{model == 'bianji'}}">
+    <view style='height: {{lineNumber*38}}rpx;' >
+      <view style='width:100%;'><text decode='true'>&nbsp;&nbsp;&nbsp;&nbsp;请输入答案</text></view>
+    </view>
+  </view>
+  <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+    {{errorMsg}}
+  </view>
+</view>
+</template>

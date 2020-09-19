@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+       xmlns:aop="http://www.springframework.org/schema/aop"  
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"  
+       xsi:schemaLocation="  
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/mvc
+            http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd">
+
+
+    <bean id="AdminPermissionResolver" class="cn.csl.manage.shiro.resolver.AdminPermissionResolver"></bean>
+
+    <bean id="adminRealm" class="cn.csl.manage.shiro.realm.AdminRealm">
+        <property name="permissionResolver" ref="AdminPermissionResolver"/>
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+        <property name="cachingEnabled" value="false" />
+    </bean>
+    <bean id="frontRealm" class="cn.csl.manage.shiro.realm.FrontRealm">
+        <property name="credentialsMatcher" ref="credentialsMatcher" />
+        <property name="cachingEnabled" value="false" />
+    </bean>
+    <!-- 自定义匹配器 继承自SimpleCredentialsMatcher -->
+    <bean id="credentialsMatcher" class="cn.csl.manage.shiro.matcher.MyCredentialsMatcher"></bean>
+    <!-- 配置使用自定义认证器，实现多Realm认证-->
+    <bean id="authenticator" class="cn.csl.manage.shiro.authenticator.ModelRealmAuthenticator">
+        <property name="authenticationStrategy">
+            <bean class="org.apache.shiro.authc.pam.AtLeastOneSuccessfulStrategy"></bean>
+        </property>
+    </bean>
+
+    <!-- 基于Form表单的身份验证过滤器 -->
+    <bean id="adminFilter" class="cn.csl.manage.shiro.filter.AdminPermissionsAuthenticationFilter">
+        <property name="loginUrl" value="/manage/admin/login" />
+        <property name="unauthorizedUrl" value="/manage/admin/login"></property>
+    </bean>
+    <bean id="frontFilter" class="cn.csl.manage.shiro.filter.FrontPermissionsAuthenticationFilter">
+        <!-- from表达提交参数的属性命名 -->
+        <!--<property name="usernameParam" value="userAccount" />-->
+        <!--<property name="passwordParam" value="password" />-->
+        <property name="loginUrl" value="/manage/front/login" />
+        <property name="unauthorizedUrl" value="/manage/front/login"></property>
+        <!--<property name="failureKeyAttribute" value="shiroLoginFailure" />-->
+    </bean>
+    <bean id="adminLogoutFilter" class="cn.csl.manage.shiro.filter.AdminLogoutFilter"></bean>
+    <bean id="roleOrFilter" class="cn.csl.manage.shiro.filter.RolesAuthorizationFilter"></bean>
+
+    <bean id="sessionManager" class="cn.csl.manage.shiro.DefaultHeaderSessionManager">
+        <!-- 设置session过期时间为1小时(单位：毫秒)，默认为30分钟 -->
+        <property name="globalSessionTimeout" value="3600000"></property>
+        <property name="sessionValidationSchedulerEnabled" value="true"></property>
+        <property name="sessionIdCookie" ref="simpleCookie"/>
+    </bean>
+    <!--前后分离共享session-->
+    <bean id="simpleCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg name="name" value="shiro.sesssion"/>
+        <property name="path" value="/"/>
+    </bean>
+
+
+    <!-- 配置权限管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+
+        <property name="authenticator" ref="authenticator" />
+        <!-- 可以配置多个Realm，realms属性被赋值给ModelRealmAuthenticator的realms属性 -->
+        <property name="realms">
+            <list>
+                <ref bean="adminRealm" />
+                <ref bean="frontRealm"/>
+            </list>
+        </property>
+
+        <!-- 使用下面配置的缓存管理器 -->
+        <property name="cacheManager" ref="cacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+
+    <!-- 配置shiro的过滤器工厂类，id- shiroFilter要和我们在web.xml中配置的过滤器一致 -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <!-- 调用我们配置的权限管理器 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!--<property name="loginUrl" value="/manage/admin/unauthorizedUrl"></property>-->
+        <!--<property name="unauthorizedUrl" value="/manage/admin/unauthorizedUrl"></property>-->
+        <property name="filters">
+            <map>
+                <!--退出过滤器-->
+                <entry key="logout" value-ref="adminLogoutFilter" />
+                <entry key="admin" value-ref="adminFilter" />
+                <entry key="front" value-ref="frontFilter" />
+                <entry key="roleOrFilter" value-ref="roleOrFilter"/>
+            </map>
+        </property>
+        <!-- 权限配置 -->
+        <!-- 通过工厂模式，获取数据库里面 权限配置-->
+        <property name="filterChainDefinitionMap" ref="filterChainDefinitionMap"/>
+    </bean>
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!--获取Bean里面的Map集合-->
+    <bean id="filterChainDefinitionMap" factory-bean="filterChainDefinitionsMapBuilder" factory-method="loadFilterChainDefinitions"/>
+
+    <!-- 读取初始自定义权限内容-->
+    <bean id="filterChainDefinitionsMapBuilder" class="cn.csl.manage.shiro.filter.FilterChainDefinitionsMapBuilder" />
+
+</beans>  

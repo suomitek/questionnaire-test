@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.csl.wenjuan.dao.WjCandidateMapper">
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjCandidate">
+    <result column="id" jdbcType="BIGINT" property="id" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="orderNum" jdbcType="INTEGER" property="orderNum" />
+    <result column="cover" jdbcType="VARCHAR" property="cover" />
+    <result column="imgIntroduce" jdbcType="VARCHAR" property="imgIntroduce" />
+    <result column="introduce" jdbcType="VARCHAR" property="introduce" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="supNum" jdbcType="INTEGER" property="supNum" />
+    <result column="useFlag" jdbcType="INTEGER" property="useFlag" />
+    <result column="voteId" jdbcType="BIGINT" property="voteId" />
+    <result column="voteType" jdbcType="INTEGER" property="voteType" />
+    <result column="wxUserId" jdbcType="BIGINT" property="wxUserId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id, state, createTime,
+      orderNum, cover, imgIntroduce,
+      introduce, name, supNum,
+      useFlag, voteId, voteType,
+      wxUserId,comment
+  </sql>
+  <sql id="Base_name" >
+    wj_candidate
+  </sql>
+  <sql id="orderAttr" >
+    orderNum
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjCandidate" keyProperty="id" useGeneratedKeys="true">
+    insert into wj_candidate (id, state, createTime, 
+      orderNum, cover, imgIntroduce, 
+      introduce, name, supNum, 
+      useFlag, voteId, voteType, 
+      wxUserId,comment)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{orderNum,jdbcType=INTEGER}, #{cover,jdbcType=VARCHAR}, #{imgIntroduce,jdbcType=VARCHAR},
+      #{introduce,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{supNum,jdbcType=INTEGER}, 
+      #{useFlag,jdbcType=INTEGER}, #{voteId,jdbcType=BIGINT}, #{voteType,jdbcType=INTEGER}, 
+      #{wxUserId,jdbcType=BIGINT},#{comment,jdbcType=VARCHAR})
+  </insert>
+
+
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjCandidate" >
+    update <include refid="Base_name" />
+    set
+    cover = #{cover,jdbcType=VARCHAR},  imgIntroduce = #{imgIntroduce,jdbcType=VARCHAR},
+    introduce = #{introduce,jdbcType=VARCHAR},  name = #{name,jdbcType=VARCHAR},  supNum = #{supNum,jdbcType=INTEGER},
+    useFlag = #{useFlag,jdbcType=INTEGER},  voteId = #{voteId,jdbcType=BIGINT},  voteType = #{voteType,jdbcType=INTEGER},
+    wxUserId = #{wxUserId,jdbcType=BIGINT},comment = #{comment,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="deleteByVoteId">
+    update <include refid="Base_name" />
+    set
+    state =0
+    where voteId = #{voteId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" />
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+
+</mapper>

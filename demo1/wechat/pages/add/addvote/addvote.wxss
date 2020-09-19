@@ -1,0 +1,227 @@
+/* pages/add/addvote/addvote.wxss */
+@import "/pages/templates/candidateItem/candidateItem.wxss";
+@import "/css/input.wxss";
+page{
+  background-color: #fff;
+}
+.textactivate{
+  color: #1296db;
+}
+.textunactivate{
+  color: #a2a2a2;
+}
+.bgactivate{
+  background-color: #1296db;
+}
+.bgunactivate{
+  background-color: #a2a2a2;
+}
+.schedules{
+  width: 90vw;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  height: 90rpx;
+  padding: 30rpx 5vw;
+  /* background-color: #fff; */
+  border-bottom: solid #bfbfbf 1rpx;
+  /* position: fixed;
+  top: 0; */
+}
+.link{
+  padding: 0 15rpx;
+  height: 100%;
+  font-size: 33rpx;
+}
+.schedule{
+  height: 100%;
+}
+.schedule-icon{
+  font-size: 30rpx;
+  display: flex;
+  justify-content: center;
+}
+.icon{
+  width: 36rpx;
+  height: 36rpx;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius:18rpx; 
+}
+.schedule-title{
+  margin-top:15rpx; 
+  font-size: 27rpx;
+}
+.list-box{
+  width: 100vw;
+}
+
+.mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  background-color:rgba(255,255,255,0.9);
+  /* background-color: #fff; */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: center;
+}
+.color-picker-view{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #000;
+}
+.mask-close{
+  background-color: #fff;
+  border-radius: 25rpx;
+  font-size: 35rpx;
+  line-height: 50rpx;
+  width: 50rpx;
+  height: 50rpx;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 40rpx;
+  color: #f00;
+}
+
+.cover{
+  width: 100vw;
+  height: 40vw;
+  position: relative;
+}
+.fengmian{
+  width: 100%;
+  height: 100%;
+}
+.img-up-btn{
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  font-size: 25rpx;
+  padding: 5rpx 20rpx;
+  color: #1262db;
+  border-radius: 15rpx;
+  border: 1rpx #1262db solid;
+  background-color: #fff;
+}
+
+.img-group{
+  width: 100vw;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.img-group-Img{
+  width: 100%;
+  min-height:20vw;
+}
+.img-group-btns{
+  position: absolute;
+  top: 20rpx;
+  right: 5vw;
+}
+.img-group-del,.img-group-edit{
+  font-size: 25rpx;
+  padding: 5rpx 20rpx;
+  border-radius: 15rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.img-group-edit{
+  color: #1262db;
+  border: solid #1262db 1rpx;
+}
+.img-group-del{
+  color: #f00;
+  border: solid #f00 1rpx;
+}
+.line{
+   width: 100vw;
+   border-bottom: solid #bfbfbf 1rpx;
+}
+
+.input-group{
+  width: 90vw;
+  padding: 20rpx 5vw;
+  border-bottom: solid #bfbfbf 1rpx;
+}
+
+.tip,.tip-switch{
+  width: 100%;
+  height: 50rpx;
+  padding: 10rpx 0;
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+}
+.tip-icon{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right:20rpx;
+}
+.tip-title{
+  height: 40rpx;
+  color: #000;
+  font-size: 33rpx;
+  display: flex;
+  align-items: center;
+}
+.txt{
+  padding: 10rpx 0;
+} 
+.placeholderStyle{
+  color:#e2e2e2;
+  font-size: 28rpx;
+}
+.tip-switch{
+  justify-content: space-between;
+}
+.tip-switch-left{
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+}
+.txt,.tip-switch-right{
+  color: #444;
+  font-size: 28rpx;
+}
+.tip-switch-right{
+  text-align: right;
+}
+textarea{
+  width: 90vw;
+  padding: 0 5vw 0 0vw;
+}
+
+
+
+
+/* .btnBg  在app.css中 */
+
+.addBtn{
+  width:50rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  font-size: 35rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  width: 30vw;
+  height: 100%;
+}
+.btn:nth-child(2){
+  margin-left: 10vw;
+}

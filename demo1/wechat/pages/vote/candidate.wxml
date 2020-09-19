@@ -1,0 +1,68 @@
+<!--pages/vote/candidate.wxml-->
+<view  style='color: {{thisVoteVo.themeColor == ""? "#fff": thisVoteVo.themeColor}}'>
+  <view class='name'>
+    <text decode='true'>{{candidate.name}}</text>
+  </view>
+  <view class='voteName'>
+    <text decode='true'>正在参加&nbsp;:&nbsp;{{thisVoteVo.name}}</text>
+  </view>
+  <view class='info'>
+    <view class='info-item'>
+      <view class='info-item-top'>
+        {{candidate.orderNum}}
+      </view>
+      <view class='info-item-bottom'>
+        编号
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-item-top'>
+        {{candidate.supNum}}
+      </view>
+      <view class='info-item-bottom'>
+        票数
+      </view>
+    </view>
+    <view class='info-item'>
+      <view class='info-item-top'>
+        {{candidate.paiming}}
+      </view>
+      <view class='info-item-bottom'>
+        排名
+      </view>
+    </view>
+  </view>
+</view>
+<view class='cover' wx:if="{{candidate.voteType != 1}}">
+  <image src='{{host}}{{candidate.covers[0]}}' mode="widthFix"></image>
+</view>
+<view class='input-show-group' wx:if="{{candidate.voteType != 0}}">
+  <view class='input-show-group-title'>
+      <image src='../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>介绍文字</view>
+  </view>
+  <view class='input-show-group-content'>
+    {{candidate.introduce}}
+  </view>
+</view>
+<view class='img-show-group' wx:if="{{candidate.imgIntroduces.length>0&&candidate.voteType != 1}}">
+  <block wx:for="{{candidate.imgIntroduces}}" wx:for-item="item" wx:key='index' >
+    <image src='{{host+item}}' mode="widthFix" class='img-show'></image>
+  </block>
+</view>
+<view class="dixian" hidden='false'>
+    <text >我也是有底线的</text>
+    <view class="line"></view>
+</view>
+<view class='btn-group'>
+  <view class='btn btnBg' bindtap="toupiao">
+      为他投票
+  </view>
+</view>
+
+
+<modal hidden="{{inputCode}}" title="非公开投票" confirm-text="提交" cancel-text="取消" bindconfirm="model2confirm" bindcancel="model2cancel" 
+confirm-color="#007aff">
+    <input placeholder='请输入投票码' bindinput='input' style='width: 100%'/>
+</modal>
+ 

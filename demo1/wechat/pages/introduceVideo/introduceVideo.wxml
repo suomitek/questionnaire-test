@@ -1,0 +1,2 @@
+<!--pages/introduceVideo/introduceVideo.wxml-->
+<web-view src="{{host}}/manage/front/introduceVideo" style='width:100vw;height:100vh;'></web-view>

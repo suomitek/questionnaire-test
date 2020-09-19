@@ -1,0 +1,6 @@
+/* pages/add/addwenjuan/question/tiankong.wxss */
+@import "/css/timu.wxss";
+page{
+  color: #999;
+}
+

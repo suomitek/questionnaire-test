@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "addmenu": "../components/addmenu/addmenu",
+    "my-poster": "../components/myposter/index"
+  }
+  
+}

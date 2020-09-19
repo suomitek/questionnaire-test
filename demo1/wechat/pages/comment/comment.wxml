@@ -1,0 +1,16 @@
+<!--pages/comment/comment.wxml-->
+<view class='input-group' style=''>
+  <view class='tip'>
+    <image src='../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+    <view class='tip-title'>{{msg}}</view>
+  </view>
+  <view class='txt'>
+    <textarea placeholder='请输入{{msg}}' value='{{comment.comment}}' data-attr='comment' bindinput="bindKeyInput" placeholder-class="placeholderStyle" maxlength='1024' style='height:80vw'></textarea>
+  </view>
+</view>
+
+<view class='btn-group'>
+  <view class='btn btnBg' bindtap="addSave">
+     评价
+  </view>
+</view>

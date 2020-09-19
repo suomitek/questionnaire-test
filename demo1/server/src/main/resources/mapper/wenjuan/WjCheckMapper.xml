@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjCheckMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjCheck" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="orderNum" property="orderNum" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="technique" property="technique" jdbcType="VARCHAR" />
+    <result column="reg" property="reg" jdbcType="VARCHAR" />
+    <result column="msg" property="msg" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id, state, createTime,
+      name, technique, reg,
+      icon,orderNum,msg
+  </sql>
+  <sql id="Base_name" >
+    wj_check
+  </sql>
+  <sql id="orderAttr" >
+    orderNum
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjCheck" keyProperty="id" useGeneratedKeys="true">
+    insert into wj_check (id, state, createTime, 
+      name, technique, reg, 
+      icon,orderNum,msg)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{name,jdbcType=VARCHAR}, #{technique,jdbcType=VARCHAR}, #{reg,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER},#{msg,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjCheck" >
+    update <include refid="Base_name" />
+    set
+    name =  #{name,jdbcType=VARCHAR},
+    technique =  #{technique,jdbcType=VARCHAR},
+    reg =  #{reg,jdbcType=VARCHAR},
+    msg =  #{msg,jdbcType=VARCHAR},
+    icon =  #{icon,jdbcType=VARCHAR},
+    orderNum =  #{orderNum,jdbcType=INTEGER},
+    state =  #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+
+
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" />
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" />
+  </select>
+
+</mapper>

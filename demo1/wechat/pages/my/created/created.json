@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "my-poster": "../../components/myposter/index"
+  },
+  "navigationBarTitleText": "我发起的"
+  
+}

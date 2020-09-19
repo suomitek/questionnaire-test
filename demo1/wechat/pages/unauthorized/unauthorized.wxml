@@ -1,0 +1,8 @@
+<!--pages/unauthorized/unauthorized.wxml-->
+<view class='imgDiv'>
+  <image src='/imgs/unauthorized.png'></image>
+</view>
+
+<view class='msg'>当前用户不被允许访问</view>
+<view class='url'>{{msg}}</view>
+<button bindtap='goLogin'>去登陆</button>

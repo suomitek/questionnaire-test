@@ -1,0 +1,4 @@
+<!--index.wxml-->
+<view class="tu" style='width: 100vw;height: {{10*problem.choices.length}}vh;'>
+  <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
+</view>

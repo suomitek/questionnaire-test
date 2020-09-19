@@ -1,0 +1,17 @@
+<view class="header">
+<view class="search-input">
+  <input placeholder="搜索地址"
+   bindinput="bindKeyInput" value='{{weizhi}}'></input>
+   </view>
+  <view class="search-btn" bindtap='search'>搜索</view>
+</view>
+<view class="result-container" hidden="{{hidden}}">
+<scroll-view scroll-y="true" class="search-result-list" hidden="{{hidden}}">
+    <block wx:for="{{sugDataList}}" wx:key="" >
+      <view class="search-result" bindtap="onTap" data-index ='{{index}}'>
+        {{item.name}}
+        <view class="search-result-desc">{{item.province}}{{item.city}}{{item.district}}{{item.name}}</view>
+      </view>
+    </block>
+</scroll-view>
+</view>

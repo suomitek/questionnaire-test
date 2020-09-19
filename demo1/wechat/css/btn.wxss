@@ -1,0 +1,26 @@
+.btn-group{
+  width: 90vw;
+  height: 10vw;
+  padding: 20rpx 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.addBtn{
+  width:50rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  font-size: 35rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  width: 30vw;
+  height: 100%;
+  margin-left: 10vw;
+}
+.btn:nth-child(1){
+  margin-left: 0;
+}

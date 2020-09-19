@@ -1,0 +1,51 @@
+<!--pages/templates/question/location.wxml-->
+<template name='location'>
+<view class='xuanzeti'>
+  <view class='timu'>
+    <view class='timu-left'>{{index + 1}}.</view>
+    <view class='timu-right'>
+      <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+      <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+      <text class='bixuan' decode='true'>&nbsp;</text>
+      {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+      <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+    </view>
+  </view>
+  <view class='location' bindtap='location' wx:if="{{location==''}}"  data-qid="{{id}}" data-index="{{index}}">
+      <image src='{{model!="bianji"?"":"../"}}../../imgs/wenben/dingwei.png' mode="widthFix"></image>
+      <text>定位</text>
+  </view>
+  <view class='location' bindtap='location' wx:if="{{location!=''}}"  data-qid="{{id}}" data-index="{{index}}">
+      <text>{{location.address}}</text>
+  </view>
+  <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+    {{errorMsg}}
+  </view>
+</view>
+</template>
+<template name='position'>
+<view class='xuanzeti'>
+  <view class='timu'>
+    <view class='timu-left'>{{index + 1}}.</view>
+    <view class='timu-right'>
+      <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+      <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+      <text class='bixuan' decode='true'>&nbsp;</text>
+      {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+      <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+    </view>
+  </view>
+  <view class='location' bindtap='position' wx:if="{{position==''}}"  data-qid="{{id}}" data-index="{{index}}">
+      <image src='{{model!="bianji"?"":"../"}}../../imgs/wenben/dingwei.png' mode="widthFix"></image>
+      <text>选择地址</text>
+  </view>
+  <view class='location' bindtap='position' wx:if="{{position!=''}}"  data-qid="{{id}}" data-index="{{index}}">
+      <text>{{position.address}}</text>
+  </view>
+  <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+    {{errorMsg}}
+  </view>
+</view>
+</template>
+
+

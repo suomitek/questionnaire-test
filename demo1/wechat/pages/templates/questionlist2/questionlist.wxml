@@ -1,0 +1,28 @@
+<!--pages/templates/votelist/votelist.wxml-->
+<template name='question_list'>
+  <view data-url='/pages/wenjuan/detailed?id={{id}}' data-index='{{index}}' bindtap='nophonefull' bindlongtap="copy"  bindtouchstart="touchStart" bindtouchend="touchEnd"  class='singlBox'>
+    <view class='imageBox'>
+      <image src='{{host}}{{cover[0]}}'></image>
+    </view>
+    <view class='jobMesBox'>
+      <view class='name'>{{name}}</view>
+      <view class='schedule' wx:if="{{schedule == 'weikaishi'}}">
+        <view><text class='weikaishi'>◉</text>未开始</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>
+      <view class='schedule' wx:elif="{{schedule == 'jinxingzhong'}}">
+        <view><text class='jinxingzhong'>◉</text>进行中</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>
+      <view class='schedule' wx:elif="{{schedule == 'zanting'}}">
+        <view><text class='zanting'>◉</text>暂停</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>
+      <view class='schedule' wx:else>
+        <view><text class='yijieshu' >◉</text>已结束</view>
+        <view><text class='time'>{{createTimeStr}}</text></view>
+      </view>
+      
+    </view>
+  </view>
+</template>

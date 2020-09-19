@@ -1,0 +1,143 @@
+
+.cand-content{
+  padding: 0 2vw 2vw 2vw;
+}
+.cand-content-top{
+  width: 90vw;
+  margin: 1vw 0 2vw 0;
+  padding: 1vw 5vw;
+  border-bottom: 1rpx dashed #bfbfbf;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between ;
+  font-size: 30rpx;
+  color: #666;
+}
+.cand-content-top-item{
+  margin-left: 2vw;
+}
+.cand-content-top-item .piao{
+  font-weight: 700;
+  color: #1262db;
+}
+
+.cand-content-top-item .yitongguo{
+  color: #38c100;
+  border:1rpx solid #38c100;
+  padding: 5rpx 10rpx;
+  font-size: 25rpx;
+  border-radius: 12.5rpx;
+}
+.cand-content-top-item .shenghezhong{
+  color: #f19410;
+  padding: 5rpx 10rpx;
+  font-size: 25rpx;
+  border-radius: 12.5rpx;
+}
+.cand-content-top-item .weitongguo{
+  color: #f11020;
+  padding: 5rpx 10rpx;
+  font-size: 25rpx;
+  border-radius: 12.5rpx;
+}
+.cand-content-bottom{
+  display: flex;
+  flex-wrap: nowrap;
+  color: #666;
+  align-items: center;
+}
+.cand-content-bottom-imgObj{
+  width: 20vw;
+  height: 20vw;
+}
+.cand-content-bottom-img{
+  width: 20vw;
+  height: 20vw;
+  border-radius:5vw; 
+}
+.cand-content-bottom-text{
+  width: 70vw;
+  padding: 0 5vw;
+}
+
+.cand-content-bottom-text1{
+  width: 90vw;
+  padding: 0 5vw;
+}
+.cand-content-bottom-text2{
+  width: 90vw;
+  height: 100%;
+  padding: 0 5vw;
+}
+
+.cand-content-bottom-text-title{
+  padding: 1vw 0;
+  font-size: 35rpx;
+  display: flex;
+}
+.cand-content-bottom-text-desc{
+  padding: 0.6vw 0;
+  font-size: 30rpx;
+}
+
+
+
+
+.cand-content-bottom-text-desc{
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+
+
+.cand-content-bottom-text-title{
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow:ellipsis;
+}
+
+
+
+
+
+
+.touch-item {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid #bfbfbf;
+  width: 100%;
+  overflow: hidden;
+  background-color: #fff;
+}
+.cand-content {
+  width: 100%;
+  margin-right:0;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  margin-left: -90px
+}
+
+.del {
+  background-color: orangered;
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  -webkit-transform: translateX(90px);
+  transform: translateX(90px);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+
+.touch-move-active .cand-content,.touch-move-active .del {
+  -webkit-transform: translateX(0);
+  transform: translateX(0);
+}

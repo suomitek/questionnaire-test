@@ -1,0 +1,72 @@
+<!--index.wxml-->
+<!--addvote  和 addwenjuan -->
+<import src="../../templates/votelist/votelist.wxml" />
+<import src="../../templates/questionlist/questionlist.wxml" />
+<view class="page">
+  <view class="headerTab">
+    <block wx:for="{{swiperTitle}}" wx:key="">
+      <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
+      bindtap="turnPage">{{item.text}}</view>
+    </block> 
+  </view>
+  
+  <view class='tab-box'>
+    <view class="list-box {{currentPage == 0 ? '' : 'hide'}}">
+      <view class='voteList'>
+        <block wx:for="{{voteList}}" wx:for-item="item" wx:key='index' >
+          <template is="vote_list" data="{{...item,host,index}}" />
+        </block>
+      </view>
+    </view>
+    <view class="list-box {{currentPage == 1 ? '' : 'hide'}}">
+      <view class='voteList'>
+        <block wx:for="{{questionList}}" wx:for-item="item" wx:key='index' >
+          <template is="question_list" data="{{...item,host,index}}" />
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <view class="mask" hidden="{{!maskShow}}" bindtap='maskHide'>
+    <view class='bei'>
+      <view class="btn-title">{{maskName}}<text class='qid'>(ID:{{maskId}})</text></view>
+      <view class="btn-btns">
+        <view class="btn-btn" bindtap='detailed'>
+          <image src='../../../imgs/add/chakan.png' mode='widthFix'></image>
+          <view>查看</view>
+        </view>
+        <view class="btn-btn" bindtap='edit'>
+          <image src='../../../imgs/add/bianji.png' mode='widthFix'></image>
+          <view>编辑</view>
+        </view>
+        <view class="btn-btn" bindtap='zanting'>
+          <image src='../../../imgs/add/zanting.png' mode='widthFix'></image>
+          <view>暂停</view>
+        </view>
+        <view class="btn-btn" bindtap='deleteObj'>
+          <image src='../../../imgs/add/shanchu.png' mode='widthFix'></image>
+          <view>删除</view>
+        </view>
+        <view class="btn-btn" bindtap='copy'>
+          <image src='../../../imgs/add/fuzhi.png' mode='widthFix'></image>
+          <view>复制</view>
+        </view>
+        <button class="btn-btn" open-type="share" hover-class='none'>
+          <image src='../../../imgs/add/fenxiang.png' mode='widthFix'></image>
+          <view>分享</view>
+        </button>
+        <view class="btn-btn" bindtap='getSharePoster'>
+          <image src='../../../imgs/add/haibao.png' mode='widthFix'></image>
+          <view>海报</view>
+        </view>        
+        <view class="btn-btn" bindtap='analysis'>
+          <image src='../../../imgs/add/fenxi.png' mode='widthFix'></image>
+          <view>分析</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+<my-poster id="getPoster" bindmyevent="myEventListener" avater="{{host+avater}}" codeimg="{{host}}/upload/xiaochengxuma.jpg" time="{{time}}" productname="{{productname}}"></my-poster>

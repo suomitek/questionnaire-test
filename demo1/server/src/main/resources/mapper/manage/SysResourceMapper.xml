@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.manage.dao.SysResourceMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.manage.entity.SysResource" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="resName" property="resName" jdbcType="VARCHAR" />
+    <result column="resCode" property="resCode" jdbcType="VARCHAR" />
+    <result column="parentId" property="parentId" jdbcType="BIGINT" />
+    <result column="resUrl" property="resUrl" jdbcType="VARCHAR" />
+    <result column="resType" property="resType" jdbcType="INTEGER" />
+    <result column="orderNum" property="orderNum" jdbcType="INTEGER" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="btnFlag" property="btnFlag" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resName, resCode,
+      parentId, resUrl, resType,
+      orderNum,state,btnFlag
+  </sql>
+  <sql id="Base_name" >
+    manage_resource
+  </sql>
+  <insert id="insert" parameterType="cn.csl.manage.entity.SysResource"  keyProperty="id" useGeneratedKeys="true">
+    insert into <include refid="Base_name" /> (id, resName, resCode, 
+      parentId, resUrl, resType, 
+      orderNum,state,btnFlag)
+    values (#{id,jdbcType=BIGINT}, #{resName,jdbcType=VARCHAR}, #{resCode,jdbcType=VARCHAR}, 
+      #{parentId,jdbcType=BIGINT}, #{resUrl,jdbcType=VARCHAR}, #{resType,jdbcType=INTEGER}, 
+      #{orderNum,jdbcType=INTEGER},state = #{state,jdbcType=INTEGER},btnFlag = #{btnFlag,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.manage.entity.SysResource" >
+    update <include refid="Base_name" />
+    set resName = #{resName,jdbcType=VARCHAR},
+      resCode = #{resCode,jdbcType=VARCHAR},
+      resUrl = #{resUrl,jdbcType=VARCHAR},
+      parentId = #{parentId,jdbcType=BIGINT},
+      resType = #{resType,jdbcType=INTEGER},
+      btnFlag = #{btnFlag,jdbcType=INTEGER},
+      orderNum = #{orderNum,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.searchdetail != null">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.searchdetail != null">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY id DESC
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY id DESC
+  </select>
+  <select id="loadAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = 1
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="listResourcesByResType" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where resType = #{resType,jdbcType=INTEGER}
+    ORDER BY id DESC
+  </select>
+  <select id="listResourceAndChildByResType" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where resType >= #{resType,jdbcType=INTEGER}
+      ORDER BY id DESC
+  </select>
+  <select id="listResourcesByParentId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where parentId = #{parentId,jdbcType=INTEGER}
+      ORDER BY id DESC
+  </select>
+</mapper>

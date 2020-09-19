@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjReplyMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjReply" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="questionId" property="questionId" jdbcType="BIGINT" />
+    <result column="wxUserId" property="wxUserId" jdbcType="BIGINT" />
+    <result column="examineFlag" property="examineFlag" jdbcType="INTEGER" />
+    <result column="ipAddress" property="ipAddress" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="street" property="street" jdbcType="VARCHAR" />
+    <result column="streetNumber" property="streetNumber" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="fraction" property="fraction" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="cn.csl.wenjuan.entity.WjReply" extends="BaseResultMap" >
+    <result column="wentisStr" property="wentisStr" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="WjReplyVoMap" type="cn.csl.wenjuan.front.vo.WjReplyVo" extends="BaseResultMap" >
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="realName" property="realName" jdbcType="VARCHAR" />
+    <result column="avatarUrl" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ChartLineMap" type="cn.csl.basics.vo.chart.line.ChartLine">
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="TIME" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, state, createTime,
+      questionId, wxUserId, examineFlag,
+      ipAddress, province, city,
+      district, street, streetNumber,
+      latitude, longitude, fraction,
+      wentisStr
+  </sql>
+  <sql id="Base_name" >
+    wj_reply
+  </sql>
+  <sql id="orderAttr" >
+    id
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjReply"  keyProperty="id" useGeneratedKeys="true">
+    insert into wj_reply (id, state, createTime, 
+      questionId, wxUserId, examineFlag, 
+      ipAddress, province, city, 
+      district, street, streetNumber, 
+      latitude, longitude, fraction, 
+      wentisStr)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{questionId,jdbcType=BIGINT}, #{wxUserId,jdbcType=BIGINT}, #{examineFlag,jdbcType=INTEGER}, 
+      #{ipAddress,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{district,jdbcType=VARCHAR}, #{street,jdbcType=VARCHAR}, #{streetNumber,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{fraction,jdbcType=INTEGER}, 
+      #{wentisStr,jdbcType=LONGVARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjReply" >
+    update <include refid="Base_name" />
+    set
+    fraction = #{fraction,jdbcType=INTEGER},
+    wentisStr = #{wentisStr,jdbcType=LONGVARCHAR},
+    state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <update id="deleteByQuestionId">
+    update <include refid="Base_name" />
+    set
+    state = 0
+    where questionId = #{questionId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" /> DESC
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listChartLine" resultMap="ChartLineMap">
+    SELECT DATE_FORMAT(createTime,${frotmt}) AS TIME,COUNT(id) AS num
+    FROM wj_reply
+    WHERE state = 1 and questionId =  #{questionId,jdbcType=BIGINT}
+    GROUP BY  TIME
+    ORDER BY TIME ASC
+  </select>
+  <select id="listReplyVo" resultMap="WjReplyVoMap">
+    SELECT *
+    FROM wj_reply AS r, wx_user AS u
+    WHERE r.state = 1 AND r.wxUserId = u.id and r.questionId =  #{questionId,jdbcType=BIGINT}
+    ORDER BY r.createTime DESC
+  </select>
+  <select id="selectByReplyVo" resultMap="WjReplyVoMap">
+    SELECT *
+    FROM wj_reply AS r, wx_user AS u
+    WHERE r.state = 1 AND r.wxUserId = u.id and r.questionId =  #{questionId,jdbcType=BIGINT}
+    and r.wxUserId =  #{wxUserId,jdbcType=BIGINT}
+  </select>
+</mapper>

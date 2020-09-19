@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.manage.dao.SysEnvironmentMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.manage.entity.SysEnvironment" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="emailHost" property="emailHost" jdbcType="VARCHAR" />
+    <result column="emailSender" property="emailSender" jdbcType="VARCHAR" />
+    <result column="emailPassword" property="emailPassword" jdbcType="VARCHAR" />
+    <result column="introduceVideoUrl" property="introduceVideoUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, emailHost,emailSender, emailPassword,introduceVideoUrl
+  </sql>
+  <sql id="Base_name" >
+    manage_environment
+  </sql>
+  <insert id="insert" parameterType="cn.csl.manage.entity.SysEnvironment" >
+    insert into <include refid="Base_name" /> (id, name, emailHost,emailSender, emailPassworde)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{emailHost,jdbcType=VARCHAR},
+      #{emailSender,jdbcType=VARCHAR}, #{emailPassworde,jdbcType=VARCHAR}, #{introduceVideoUrl,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.manage.entity.SysEnvironment" >
+    update <include refid="Base_name" />
+    set name = #{name,jdbcType=VARCHAR},
+      emailHost = #{emailHost,jdbcType=VARCHAR},
+      emailSender = #{emailSender,jdbcType=VARCHAR},
+      emailPassword = #{emailPassword,jdbcType=VARCHAR},
+      introduceVideoUrl = #{introduceVideoUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+</mapper>

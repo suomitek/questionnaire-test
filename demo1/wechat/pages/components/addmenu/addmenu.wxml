@@ -1,0 +1,7 @@
+<!--pages/components/dialog/dialog.wxml-->
+<view class="drawer_screen" bindtap="showOrHide" wx:if="{{isShow}}" catchtouchmove="myCatchTouch"></view>
+<view >
+  <image src="{{wenjuanImg}}" class="buttom" animation="{{animDelLots}}" bindtap="wenjuan"></image>
+  <image src="{{voteImg}}" class="buttom" animation="{{animAdd}}" bindtap="vote"></image>
+  <image src="../../../imgs/add.png" class="buttom" animation="{{animMain}}" bindtap="showOrHide"></image>
+</view>

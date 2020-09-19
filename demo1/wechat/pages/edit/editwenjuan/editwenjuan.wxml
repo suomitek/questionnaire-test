@@ -1,0 +1,67 @@
+<!--pages/edit/editwenjuan/editwenjuan.wxml-->
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>问卷名称</view>
+    </view>
+    <view class='tip-switch-right'>
+      <input maxlength="20" value='{{setting.name}}' data-attr='name' bindinput="bindKeyInput" placeholder="请输入问卷名称" placeholder-class="placeholderStyle" />
+    </view>
+  </view>
+</view>
+<view class='input-group'>
+  <view class='tip'>
+    <image src='../../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+    <view class='tip-title'>问卷介绍</view>
+  </view>
+  <view class='txt'>
+    <textarea placeholder='请输入问卷介绍' value='{{setting.introduce}}' data-attr='introduce' bindinput="bindKeyInput" placeholder-class="placeholderStyle" maxlength='1024'></textarea>
+  </view>
+</view>
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>开始时间</view>
+    </view>
+    <view class='tip-switch-right multiSelector'>
+      <picker mode="multiSelector" value="{{setting.dateTime}}" bindchange="changeDateTime" bindcolumnchange="changeDateTimeColumn" range="{{setting.dateTimeArray}}">
+        <view class="tui-picker-detail"> {{setting.dateTimeArray[0][setting.dateTime[0]]}}-{{setting.dateTimeArray[1][setting.dateTime[1]]}}-{{setting.dateTimeArray[2][setting.dateTime[2]]}} {{setting.dateTimeArray[3][setting.dateTime[3]]}}:{{setting.dateTimeArray[4][setting.dateTime[4]]}}:{{setting.dateTimeArray[5][setting.dateTime[5]]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>结束时间</view>
+    </view>
+    <view class='tip-switch-right multiSelector'>
+      <picker mode="multiSelector" value="{{setting.dateTime1}}" bindchange="changeDateTime1" bindcolumnchange="changeDateTimeColumn1" range="{{setting.dateTimeArray1}}">
+        <view class="tui-picker-detail"> {{setting.dateTimeArray1[0][setting.dateTime1[0]]}}-{{setting.dateTimeArray1[1][setting.dateTime1[1]]}}-{{setting.dateTimeArray1[2][setting.dateTime1[2]]}} {{setting.dateTimeArray1[3][setting.dateTime1[3]]}}:{{setting.dateTimeArray1[4][setting.dateTime1[4]]}}:{{setting.dateTimeArray1[5][setting.dateTime1[5]]}}
+        </view>
+      </picker>
+    </view>
+  </view>
+</view>
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/bugongkai_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>是否公开</view>
+    </view>
+    <view class='tip-switch-right'>
+      <switch wx:if="{{setting.overt==0}}" bindchange="changeSwitch" data-attr='overt'/>
+      <switch wx:if="{{setting.overt==1}}" checked bindchange="changeSwitch" data-attr='overt'/>
+    </view>
+  </view>
+</view>
+<view class='btn-group'>
+  <view class='btn btnBg' bindtap="fabu">
+    编辑
+  </view>
+</view>

@@ -1,0 +1,18 @@
+/* pages/comment/comment.wxss */
+@import "/css/input.wxss";
+@import "/css/btn.wxss";
+page{
+  background-color: #fff;
+}
+.input-group{
+  height: 141vw;
+  border-bottom: none
+}
+
+.btn-group{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background-color: #fff;
+  border-top: 1rpx dashed #ccc;
+}

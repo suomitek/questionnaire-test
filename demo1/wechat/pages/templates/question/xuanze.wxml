@@ -1,0 +1,83 @@
+<!--pages/templates/question/xuanze.wxml-->
+<template name='duoxuan'>
+<view class='fu'>
+  <view class='xuanzeti'>
+    <checkbox-group bindchange="checkboxChange" data-qid="{{id}}" data-index="{{index}}">
+      <view class='timu'>
+        <view class='timu-left'>{{index+1}}.</view>
+        <view class='timu-right'>
+          <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+          <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+          <text class='bixuan' decode='true'>&nbsp;</text>
+          {{name}}<text style='color:#999'>[多选题</text>
+          <text style='color:#999' wx:if="{{examineFlag==1}}">、{{score}}分</text>
+          <text style='color:#999'>]</text>
+          <text style='color:#1296db' decode='true'wx:if="{{obtain>=0}}" >&nbsp;[{{obtain}}分]</text>
+        </view>
+      </view>
+      <view class='timucover' wx:if="{{cover.length >0}}">
+        <image src='{{host+cover[0]}}' mode="widthFix" class='timufengmian'></image>
+      </view>
+      <block wx:for="{{choices}}" wx:for-item="item2" wx:key='index2'  wx:for-index="index2">
+        <view class='xuanxiang'>
+          <view class='xuanxiang-top'>
+            <view class='xuanxiang-left'>
+              <checkbox value="{{index2}}" checked="{{item2.flag}}"/>
+            </view>
+            <view class='xuanxiang-rigth'>
+              {{item2.name}}
+            </view>
+          </view>
+          <view class='xuanxiang-bottom' wx:if="{{item2.cover.length >0}}">
+            <image src='{{host+item2.cover[0]}}' mode="widthFix" class='xuangxiangtu'></image>
+          </view>
+        </view>
+      </block>
+    </checkbox-group>
+    <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+      {{errorMsg}}
+    </view>
+  </view>
+</view>
+</template>
+<template name='danxuan'>
+<view class='fu'>
+  <view class='xuanzeti'>
+    <radio-group class="radio-group" bindchange="radioChange"  data-qid="{{id}}" data-index="{{index}}">
+      <view class='timu'>
+        <view class='timu-left'>{{index+1}}.</view>
+        <view class='timu-right'>
+          <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+          <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+          <text class='bixuan' decode='true'>&nbsp;</text>
+          {{name}}<text style='color:#999'>[单选题</text>
+          <text style='color:#999' wx:if="{{examineFlag==1}}">、{{score}}分</text>
+          <text style='color:#999'>]</text>
+          <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{obtain}}分]</text>
+        </view>
+      </view>
+      <view class='timucover' wx:if="{{cover.length >0 }}">
+        <image src='{{host+cover[0]}}' mode="widthFix" class='timufengmian'></image>
+      </view>
+      <block wx:for="{{choices}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+        <view class='xuanxiang'>
+          <view class='xuanxiang-top'>
+            <view class='xuanxiang-left'>
+              <radio value="{{index2}}" checked="{{item2.flag}}"/>
+            </view>
+            <view class='xuanxiang-rigth'>
+              {{item2.name}}
+            </view>
+          </view>
+          <view class='xuanxiang-bottom' wx:if="{{item2.cover.length >0}}">
+            <image src='{{host+item2.cover[0]}}' mode="widthFix" class='xuangxiangtu'></image>
+          </view>
+        </view>
+      </block>
+    </radio-group>
+    <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+      {{errorMsg}}
+    </view>
+  </view>
+</view>
+</template>

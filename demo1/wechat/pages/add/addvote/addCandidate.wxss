@@ -1,0 +1,30 @@
+/* pages/add/addvote/addCandidate.wxss */
+@import "/css/input.wxss";
+page{
+  background-color: #fff;
+}
+
+.cover{
+  width: 40vw;
+  height: 40vw;
+  margin:5vw 30vw;
+  border-radius: 12.5vw;
+  position: relative;
+}
+.fengmian{
+  width: 100%;
+  height: 100%;
+  border-radius: 10%;
+}
+.img-up-btn{
+  position: absolute;
+  right: 5%;
+  top: 10%;
+  font-size: 25rpx;
+  padding: 5rpx 20rpx;
+  color: #1262db;
+  border-radius: 15rpx;
+  border: 1rpx #1262db solid;
+  background-color: #fff;
+}
+

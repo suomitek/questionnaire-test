@@ -1,0 +1,341 @@
+/* pages/wenjuan/analysis/analysis.wxss */
+.headerTab{
+  width: 100%;
+  z-index:999;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 0 0 20rpx 20rpx;
+  /* position: fixed;
+  top: 0; */
+}
+.headerTab .title{
+  height: 70rpx;
+  width: 180rpx;
+  line-height: 70rpx;
+  font-size: 30rpx;
+  text-align: center;
+  display: table;
+  table-layout: fixed;
+}
+.headerTab .title.selected{
+  border-bottom: 7rpx solid #1296db;
+  font-weight: 600;
+}
+.list-box{
+  width: 100vw;
+  margin-top: 20rpx;
+}
+.info{
+  width: 100%;
+  border-radius: 25rpx 25rpx 0 0 ;
+  background-color: #fff;
+}
+
+.name{
+  width: 100%;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-size: 42rpx;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden; 
+  text-overflow:ellipsis;
+  padding: 35rpx 0;
+}
+.code{
+  width: 100%;
+  display: flex;
+  font-size: 35rpx;
+  align-content: center;
+  justify-content: center;
+  padding-bottom: 1rpx;
+}
+
+.tongji{
+  width: 100%;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tongji .item{
+  width: 30%;
+}
+.br{
+  width: 1rpx;
+  height: 45rpx;
+  border-right: 1rpx dashed #737373;
+}
+.item-top,.item-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+}
+.item-top{
+  font-size: 45rpx;
+}
+.item-bottom{
+  margin-top: 6rpx;
+  font-size: 28rpx;
+  color: #939393;
+}
+.jindu{
+  width: 100vw;
+  height: 100vw;
+}
+.tu-titie{
+  width: 100%;
+  padding: 15rpx 0;
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+}
+#mychart-dom-line,#mychart-dom-gauge{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.problem{
+  width: 90%;
+  margin: 0 5%;
+  padding-top: 20rpx;
+}
+.problem:nth-child(1){
+  padding-top: 30rpx;
+}
+.problem:nth-last-child(1){
+  padding-bottom: 30rpx;
+}
+.problem-name{
+  width: 100%;
+  padding: 10rpx 0;
+  font-size: 29rpx;
+  color: #666;
+}
+.tihao{
+  color: #000;
+  font-weight: 600;
+}
+.renshu{
+  color: #939393;
+  font-size: 25rpx;
+}
+.problem-fenxi{
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: flex-start;
+}
+.problem-concent{
+  width: 100%;
+}
+
+.problem-concent-desc,.problem-concent-desc1{
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  padding: 5rpx 0;
+  border-radius: 20rpx;
+  border:2rpx dashed #1296db;
+  color: #1296db;
+  margin: 0 5vw;
+}
+.problem-concent-desc1{
+  border:2rpx dashed #f00;
+  color: #f00;
+}
+.dc{
+  display: flex;
+  justify-content: flex-end;
+}
+.tr1{
+  border-top:1rpx solid #999; 
+  background-color: #f6f6f6;
+}
+
+.problem-concent-tr{
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  border-bottom:1rpx solid #999; 
+  font-size: 28rpx;
+  color: #333;
+}
+.table-name1,.table-name2,.table-name3{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.table-name1{
+ width: 50%;
+}
+.table-name2{
+ width: 20%;
+}
+.table-name3{
+ width: 30%;
+}
+.trn{
+  display: flex;
+  justify-content: flex-end;
+  padding: 20rpx 0;
+}
+.btn-tu{
+  padding: 5rpx 10rpx;
+  border-radius: 10rpx;
+  border:2rpx dashed #1296db;
+  color: #1296db;
+  font-size: 26rpx;
+  margin-right: 5vw;
+}
+.daan{
+  font-size: 20rpx;
+  color: #f00;
+}
+
+/* 答卷列表*/
+.commentList{
+  width: 90vw;
+  padding:5vw; 
+}
+.comment{
+  width: 100%;
+  padding: 10rpx 0;
+  border-bottom:1rpx dashed #bbb; 
+}
+.comment-top{
+  width: 100%;
+  display: flex;
+  /* padding: 10rpx 0; */
+  flex-flow: nowrap;
+}
+.comment-top-left{
+  width: 90%;
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+}
+.comment-top-left-tuoxiang{
+  width: 12%;
+  border-radius: 50%;
+}
+.comment-top-left-tuoxiang image{
+  width: 100%;
+  border-radius: 50%;
+}
+.comment-top-left-nickname{
+  margin-left: 5%;
+  
+}
+.comment-top-left-nicknam-name{
+  font-size: 30rpx;
+  color: #666;
+}
+.comment-top-left-nicknam-time{
+  font-size: 25rpx;
+  color: #bbb;
+}
+.comment-top-rigth{
+  width: 10%;
+  display: flex;
+  justify-items: flex-end;
+  align-items: center;
+  color: #939393;
+}
+.comment-top-rigth .zan_icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+.one{
+  /* border-top:1rpx dashed #ccc;  */
+}
+.comment-bottom-concent{
+  width: 100%;
+}
+.comment-bottom-concent-tr{
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* border-bottom:1rpx dashed #ccc;  */
+  font-size: 28rpx;
+  color: #333;
+}
+
+.table-name4{
+ width: 15%;
+ display: flex;
+ justify-content: center;
+}
+.table-name4 .btn{
+  padding: 5rpx 20rpx;
+  border-radius: 10rpx;
+  border:2rpx dashed #1296db;
+  color: #1296db;
+  font-size: 26rpx;
+}
+.table-name5{
+ width: 75%;
+}
+.table-name6{
+ width: 10%;
+}
+.table-name6 .zan_icon{
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 10rpx;
+}
+
+
+.mask{
+  width: 100vw;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color:rgba(255,255,255,0.95);
+}
+.ip{
+  width: 100vw;
+}
+.mask-title{
+  width: 100vw;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  font-size: 33rpx;
+}
+
+
+.qrcode{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20rpx 0;
+}
+.qrcode view{
+  width: 100%;
+  font-size: 28rpx;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  padding: 10rpx 0;
+}
+.qrcode image{
+  width: 40%;
+  padding: 10rpx 0;
+}

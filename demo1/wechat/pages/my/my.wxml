@@ -1,0 +1,48 @@
+<!--pages/my/my.wxml-->
+<!--addvote  和 addwenjuan -->
+<addmenu hidden id='addmenu' bind:vote="addvote" bind:wenjuan="addwenjuan"/> 
+  <!--顶部头像-->
+<view class="top">
+  <view class="photo">
+    <image src="{{wxUserInfo.avatarUrl}}"></image>
+  </view>
+  <view class="phone_num">{{wxUserInfo.nickName}}</view> 
+</view>
+<view class="background_view">
+  <view class='wave'></view>
+  <view class='wave_1'></view>
+  <view class='wave_2'></view>
+</view>
+  <!--/顶部头像end--> 
+<!--个人中心列表项-->
+<view class="item_list">
+    <!-- <navigator url="../login/login" hover-class="navigator-hover">点击登录</navigator> -->
+    <view bindtap="goto" data-url='/pages/my/xinxi/xinxi' class="item_list_msg">
+      <view class="list_icon"><image src="../../imgs/my/xinxi.png"></image></view>
+      <text>个人信息</text>
+    </view>
+    <view class="line_x"></view>
+     <view bindtap="goto" data-url='/pages/my/created/created' class="item_list_msg">
+      <view class="list_icon"><image src="../../imgs/my/wochuangjiande.png"></image></view>
+      <text>我发布的</text>
+    </view>
+    <view class="line_x"></view>
+    <view bindtap="goto" data-url='/pages/my/join/join' class="item_list_msg">
+      <view class="list_icon"><image src="../../imgs/my/wocanyude.png"></image></view>
+      <text>我参与的</text>
+    </view>
+   <view class="line_x"></view>
+    <view bindtap="goto" data-url='/pages/my/lishi/lishi' class="item_list_msg">
+      <view class="list_icon"><image src="../../imgs/my/liulanlishi.png"></image></view>
+      <text>浏览历史</text>
+    </view>
+    <view class="line_x"></view>
+     <view bindtap="goto" data-url='/pages/introduceVideo/introduceVideo' class="item_list_msg">
+      <view class="list_icon"><image src="../../imgs/my/vido.png"></image></view>
+      <text>介绍视频</text>
+    </view>
+    
+</view>
+<!--/个人中心列表项end-->
+
+

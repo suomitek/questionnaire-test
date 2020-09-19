@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjVoteMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjVote" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="cover" property="cover" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
+    <result column="themeColor" property="themeColor" jdbcType="VARCHAR" />
+    <result column="imgIntroduce" property="imgIntroduce" jdbcType="VARCHAR" />
+    <result column="repeatFlag" property="repeatFlag" jdbcType="INTEGER" />
+    <result column="frequency" property="frequency" jdbcType="INTEGER" />
+    <result column="restrictFlag" property="restrictFlag" jdbcType="INTEGER" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="ipWxUserFrequency" property="ipWxUserFrequency" jdbcType="INTEGER" />
+    <result column="overt" property="overt" jdbcType="INTEGER" />
+    <result column="comment" property="comment" jdbcType="INTEGER" />
+    <result column="outside" property="outside" jdbcType="INTEGER" />
+    <result column="sponsor" property="sponsor" jdbcType="INTEGER" />
+    <result column="sponsorName" property="sponsorName" jdbcType="VARCHAR" />
+    <result column="sponsorPhone" property="sponsorPhone" jdbcType="VARCHAR" />
+    <result column="rewar" property="rewar" jdbcType="INTEGER" />
+    <result column="rewardDesc" property="rewardDesc" jdbcType="VARCHAR" />
+    <result column="rewarImg" property="rewarImg" jdbcType="VARCHAR" />
+    <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+    <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="voteType" property="voteType" jdbcType="INTEGER" />
+    <result column="unusual" property="unusual" jdbcType="INTEGER" />
+    <result column="unusualEplain" property="unusualEplain" jdbcType="VARCHAR" />
+    <result column="reportEplain" property="reportEplain" jdbcType="VARCHAR" />
+    <result column="voteDataStr" property="voteDataStr" jdbcType="VARCHAR" />
+    <result column="voteCode" property="voteCode" jdbcType="VARCHAR" />
+    <result column="rWxUserId" property="rWxUserId" jdbcType="BIGINT" />
+    <result column="wxUserId" property="wxUserId" jdbcType="BIGINT" />
+    <result column="candidateNum" property="candidateNum" jdbcType="INTEGER" />
+    <result column="candidateIndex" property="candidateIndex" jdbcType="INTEGER" />
+    <result column="supNum" property="supNum" jdbcType="INTEGER" />
+    <result column="suspend" property="suspend" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+   id, state, createTime,
+      name, cover, introduce,
+      themeColor, imgIntroduce, repeatFlag,
+      frequency, restrictFlag, province,
+      city, district, ipWxUserFrequency,
+      overt, comment, outside,
+      sponsor, sponsorName, sponsorPhone,
+      reward, rewardDesc, rewarImg,
+      startTime, endTime, voteType,
+      unusual, unusualEplain, reportEplain,
+      rWxUserId, wxUserId, candidateNum,
+      candidateIndex, supNum,voteDataStr,
+      voteCode,suspend
+  </sql>
+  <sql id="Base_name" >
+    wj_vote
+  </sql>
+  <sql id="orderAttr" >
+    id
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjVote" keyProperty="id" useGeneratedKeys="true">
+    insert into wj_vote (id, state, createTime, 
+      name, cover, introduce,
+      themeColor, imgIntroduce, repeatFlag,
+      frequency, restrictFlag, province,
+      city, district, ipWxUserFrequency,
+      overt, comment, outside,
+      sponsor, sponsorName, sponsorPhone,
+      reward, rewardDesc, rewarImg,
+      startTime, endTime, voteType,
+      unusual, unusualEplain, reportEplain,
+      rWxUserId, wxUserId, candidateNum,
+      candidateIndex, supNum,voteDataStr,
+      voteCode,suspend)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{name,jdbcType=VARCHAR}, #{cover,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR},
+      #{themeColor,jdbcType=VARCHAR}, #{imgIntroduce,jdbcType=VARCHAR}, #{repeatFlag,jdbcType=INTEGER},
+      #{frequency,jdbcType=INTEGER}, #{restrictFlag,jdbcType=INTEGER}, #{province,jdbcType=VARCHAR},
+      #{city,jdbcType=VARCHAR}, #{district,jdbcType=VARCHAR}, #{ipWxUserFrequency,jdbcType=INTEGER},
+      #{overt,jdbcType=INTEGER}, #{comment,jdbcType=INTEGER}, #{outside,jdbcType=INTEGER},
+      #{sponsor,jdbcType=INTEGER}, #{sponsorName,jdbcType=VARCHAR}, #{sponsorPhone,jdbcType=VARCHAR},
+      #{reward,jdbcType=INTEGER}, #{rewardDesc,jdbcType=VARCHAR}, #{rewarImg,jdbcType=VARCHAR},
+      #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}, #{voteType,jdbcType=INTEGER},
+      #{unusual,jdbcType=INTEGER}, #{unusualEplain,jdbcType=VARCHAR}, #{reportEplain,jdbcType=VARCHAR},
+      #{rWxUserId,jdbcType=BIGINT}, #{wxUserId,jdbcType=BIGINT}, #{candidateNum,jdbcType=INTEGER},
+      #{candidateIndex,jdbcType=INTEGER}, #{supNum,jdbcType=INTEGER}, #{voteDataStr,jdbcType=VARCHAR},
+      #{voteCode,jdbcType=VARCHAR},#{suspend,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjVote" >
+    update <include refid="Base_name" />
+    set
+    name = #{name,jdbcType=VARCHAR}, cover = #{cover,jdbcType=VARCHAR}, introduce = #{introduce,jdbcType=VARCHAR},
+    themeColor = #{themeColor,jdbcType=VARCHAR}, imgIntroduce = #{imgIntroduce,jdbcType=VARCHAR}, repeatFlag = #{repeatFlag,jdbcType=INTEGER},
+    frequency = #{frequency,jdbcType=INTEGER}, restrictFlag = #{restrictFlag,jdbcType=INTEGER}, province = #{province,jdbcType=VARCHAR},
+    city = #{city,jdbcType=VARCHAR}, district = #{district,jdbcType=VARCHAR}, ipWxUserFrequency = #{ipWxUserFrequency,jdbcType=INTEGER},
+    overt = #{overt,jdbcType=INTEGER}, comment = #{comment,jdbcType=INTEGER}, outside = #{outside,jdbcType=INTEGER},
+    sponsor = #{sponsor,jdbcType=INTEGER}, sponsorName = #{sponsorName,jdbcType=VARCHAR},sponsorPhone = #{sponsorPhone,jdbcType=VARCHAR},
+    reward = #{reward,jdbcType=INTEGER}, rewardDesc = #{rewardDesc,jdbcType=VARCHAR}, rewarImg = #{rewarImg,jdbcType=VARCHAR},
+    startTime = #{startTime,jdbcType=TIMESTAMP}, endTime = #{endTime,jdbcType=TIMESTAMP}, voteType = #{voteType,jdbcType=INTEGER},
+    unusual = #{unusual,jdbcType=INTEGER}, unusualEplain = #{unusualEplain,jdbcType=VARCHAR}, reportEplain = #{reportEplain,jdbcType=VARCHAR},
+    rWxUserId = #{rWxUserId,jdbcType=BIGINT}, wxUserId = #{wxUserId,jdbcType=BIGINT}, candidateNum = #{candidateNum,jdbcType=INTEGER},
+    candidateIndex = #{candidateIndex,jdbcType=INTEGER}, supNum = #{supNum,jdbcType=INTEGER},suspend = #{suspend,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+  <update id="delete">
+    update <include refid="Base_name" />
+    set
+    state = 0
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    <![CDATA[  and endTime > NOW()   ]]>
+    and overt = 1
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    <![CDATA[  and endTime > NOW()   ]]>
+    and overt = 1
+    ORDER BY endTime asc
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listJoin" resultMap="BaseResultMap">
+    SELECT distinct v.id, v.state, r.createTime,
+      v.name, v.cover, v.introduce,
+      v.themeColor, v.imgIntroduce, v.repeatFlag,
+      v.frequency, v.restrictFlag, v.province,
+      v.city, v.district, v.ipWxUserFrequency,
+      v.overt, v.comment, v.outside,
+      v.sponsor, v.sponsorName, v.sponsorPhone,
+      v.reward, v.rewardDesc, v.rewarImg,
+      v.startTime, v.endTime, v.voteType,
+      v.unusual, v.unusualEplain, v.reportEplain,
+      v.rWxUserId, v.wxUserId, v.candidateNum,
+      v.candidateIndex, v.supNum,v.voteDataStr,
+      v.voteCode,v.suspend
+    FROM wj_vote AS v, wj_voterecord AS r
+    WHERE v.id = r.voteId AND r.wxUserId = #{wxUserId,jdbcType=BIGINT} AND v.state = 1
+    ORDER BY r.createTime DESC
+  </select>
+  <select id="listFootprint" resultMap="BaseResultMap">
+    SELECT distinct v.id, v.state, f.createTime,
+      v.name, v.cover, v.introduce,
+      v.themeColor, v.imgIntroduce, v.repeatFlag,
+      v.frequency, v.restrictFlag, v.province,
+      v.city, v.district, v.ipWxUserFrequency,
+      v.overt, v.comment, v.outside,
+      v.sponsor, v.sponsorName, v.sponsorPhone,
+      v.reward, v.rewardDesc, v.rewarImg,
+      v.startTime, v.endTime, v.voteType,
+      v.unusual, v.unusualEplain, v.reportEplain,
+      v.rWxUserId, v.wxUserId, v.candidateNum,
+      v.candidateIndex, v.supNum,v.voteDataStr,
+      v.voteCode,v.suspend
+    FROM wj_vote AS v, wj_footprint AS f
+    WHERE v.id = f.surfaceId AND f.subscriberId = #{wxUserId,jdbcType=BIGINT} AND v.state = 1 AND f.surface = "wj_vote"
+    ORDER BY f.updataTime DESC
+  </select>
+
+</mapper>

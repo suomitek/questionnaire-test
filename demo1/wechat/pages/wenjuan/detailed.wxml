@@ -1,0 +1,72 @@
+<!--pages/wenjuan/detailed.wxml-->
+<import src="/pages/templates/question/xuanze.wxml" />
+<import src="/pages/templates/question/wenben.wxml" />
+<import src="/pages/templates/question/pingfen.wxml" />
+<import src="/pages/templates/question/wenjian.wxml" />
+<import src="/pages/templates/question/location.wxml" />
+
+
+<view class='detailed' style='color: {{setting.themeColor == ""? "#fff": setting.themeColor}}'>
+  <view id='xidingTop' style='z-index:999'>
+    <view class='cover'>
+      <image src='{{setting.cover[0] == "" ? "../../imgs/fengmian.png": host+setting.cover[0]}}' class='fengmian'></image>
+    </view>
+    <view class="xiangqin" bindtap='goxiangqin'>
+      活动详情
+    </view>
+    <view class='info' wx:if="{{mod=='zhengshi'}}">
+      <view class='name'>{{setting.name.length>10?setting.name2:setting.name}}</view>
+      <view class='time' style='background-color:{{colorStyle.timebgcolor}}' wx:if="{{mod!='yulan'}}">
+        <view class='time-top'>
+         <text wx:if="{{setting.flag == 0}}" style='color:{{colorStyle.zanting}}'>活动暂停</text>
+          <text wx:if="{{setting.flag == 1}}" style='color:{{colorStyle.weikaishi}}'>距活动开始</text>
+          <text wx:if="{{setting.flag == 2}}" style='color:{{colorStyle.jinxingzhong}}'>距活动结束</text>
+          <text wx:if="{{setting.flag == 3}}" style='color:{{colorStyle.yijishu}}'>活动已经结束</text>
+        </view>
+        <view class='time-bottom'  wx:if="{{setting.flag == 1}}" > 
+          <!-- 距活动开始 -->
+          {{countDownList[0].day}}<view class='timets'>天</view>
+          {{countDownList[0].hou}}<view class='timets'>时</view>
+          {{countDownList[0].min}}<view class='timets'>分</view>
+          {{countDownList[0].sec}}<view class='timets'>秒</view>
+        </view>
+        <view class='time-bottom'  wx:if="{{setting.flag == 2}}" > 
+          <!-- 距活动结束 -->
+          {{countDownList[1].day}}<view class='timets'>天</view>
+          {{countDownList[1].hou}}<view class='timets'>时</view>
+          {{countDownList[1].min}}<view class='timets'>分</view>
+          {{countDownList[1].sec}}<view class='timets'>秒</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class='defen' wx:if="{{setting.answer==1&&setting.examineFlag==1}}">
+  得分:<text decode='true' style='coler:#1296db'>{{setting.fraction}}&nbsp;&nbsp;&nbsp;</text>总分:<text decode='true' style='coler:#f00'>{{setting.sumScore}}</text>
+  </view>
+  <view class='wentis'  wx:if="{{setting.flag == 2 || mod=='yulan'||setting.answer==1}}">
+     <block wx:for="{{wentis}}" wx:for-item="item" wx:key='index'>
+      <view class='bianji'>
+        <view class='bianji-ti'>
+          <template is='{{item.qType}}' data="{{...item,index,host,mod}}"/>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class='btn-group'>
+    <view class='btn btnBg' bindtap="tijiao" wx:if="{{setting.answer == 0 && setting.flag == 2}}">
+        提交答案
+    </view>
+  </view>
+  <view class='zhanwei'></view>
+</view>
+
+
+<modal hidden="{{inputCode}}" title="非公开问卷" confirm-text="提交" cancel-text="取消" bindconfirm="model2confirm" bindcancel="model2cancel" 
+confirm-color="#007aff">
+    <input placeholder='请输入问卷密码' bindinput='input' style='width: 100%' value='{{setting.code}}'/>
+</modal>
+<modal hidden="{{userinfo}}" title="用户信息" confirm-text="提交" cancel-text="取消" bindconfirm="model1confirm" bindcancel="model1cancel" 
+confirm-color="#007aff">
+    <input placeholder='请输入用户名' bindinput='input1' style='width: 100%' data-attr='realName' value='{{realName}}'/>
+    <input placeholder='请输入手机号' bindinput='input1' style='width: 100%' data-attr='phone' value='{{phone}}'/>
+</modal>

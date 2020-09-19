@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wenjuan.dao.WjAnswerMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wenjuan.entity.WjAnswer" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="wxUserId" property="wxUserId" jdbcType="BIGINT" />
+    <result column="questionId" property="questionId" jdbcType="BIGINT" />
+    <result column="problemId" property="problemId" jdbcType="BIGINT" />
+    <result column="qType" property="qType" jdbcType="VARCHAR" />
+    <result column="orderNum" property="orderNum" jdbcType="INTEGER" />
+    <result column="replyId" property="replyId" jdbcType="BIGINT" />
+    <result column="checkId" property="checkId" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="fen" property="fen" jdbcType="INTEGER" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="addressDesc" property="addressDesc" jdbcType="VARCHAR" />
+    <result column="imgPath" property="imgPath" jdbcType="VARCHAR" />
+    <result column="imgId" property="imgId" jdbcType="BIGINT" />
+    <result column="filePath" property="filePath" jdbcType="VARCHAR" />
+    <result column="reg" property="reg" jdbcType="VARCHAR" />
+    <result column="fileId" property="fileId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="WjAnswerVoMap" type="cn.csl.wenjuan.front.vo.WjAnswerVo" extends="BaseResultMap" >
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="realName" property="realName" jdbcType="VARCHAR" />
+    <result column="avatarUrl" property="avatarUrl" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, state, createTime,
+      wxUserId, questionId, problemId,
+      qType, orderNum, replyId,
+      checkId, content, fen,
+      latitude, longitude, address,
+      addressDesc, imgPath, imgId,
+      filePath, fileId,reg
+  </sql>
+  <sql id="Base_name" >
+    wj_answer
+  </sql>
+  <sql id="orderAttr" >
+    orderNum
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wenjuan.entity.WjAnswer"  keyProperty="id" useGeneratedKeys="true">
+    insert into wj_answer (id, state, createTime, 
+      wxUserId, questionId, problemId, 
+      qType, orderNum, replyId, 
+      checkId, content, fen, 
+      latitude, longitude, address, 
+      addressDesc, imgPath, imgId, 
+      filePath, fileId,reg,
+      score,obtain)
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{wxUserId,jdbcType=BIGINT}, #{questionId,jdbcType=BIGINT}, #{problemId,jdbcType=BIGINT}, 
+      #{qType,jdbcType=VARCHAR}, #{orderNum,jdbcType=INTEGER}, #{replyId,jdbcType=BIGINT},
+      #{checkId,jdbcType=BIGINT}, #{content,jdbcType=VARCHAR}, #{fen,jdbcType=INTEGER},
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{addressDesc,jdbcType=VARCHAR}, #{imgPath,jdbcType=VARCHAR}, #{imgId,jdbcType=BIGINT}, 
+      #{filePath,jdbcType=VARCHAR}, #{fileId,jdbcType=BIGINT},#{reg,jdbcType=VARCHAR},
+      #{score,jdbcType=INTEGER}, #{obtain,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wenjuan.entity.WjAnswer" >
+    update <include refid="Base_name" />
+    set
+    obtain = #{obtain,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="deleteByQuestionId">
+    update <include refid="Base_name" />
+    set
+    state = 0
+    where questionId = #{questionId,jdbcType=BIGINT}
+  </update>
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" /> DESC
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listAnswerVoByProblemId" resultMap="WjAnswerVoMap">
+    SELECT *
+    FROM wj_answer AS a, wx_user AS u
+    WHERE a.state = 1 AND a.wxUserId = u.id
+    AND a.problemId = #{problemId,jdbcType=BIGINT}
+  </select>
+  <select id="listAnswerVoByQuestionId" resultMap="WjAnswerVoMap">
+    SELECT *
+    FROM wj_answer AS a, wx_user AS u
+    WHERE a.state = 1 AND a.wxUserId = u.id
+    AND a.questionId = #{questionId,jdbcType=BIGINT}
+    ORDER BY a.`wxUserId`,a.`problemId`
+  </select>
+</mapper>

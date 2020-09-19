@@ -1,0 +1,84 @@
+<!--pages/wenjuan/analysis/analysis/wenben/index.wxml-->
+<view class='problem'>
+  <view class='problem-name tr1'><text decode='true' class='tihao'>{{tihao}}.&nbsp;&nbsp;</text>{{name}}</view>
+  <view class='problem-concent' wx:if="{{qType=='jianda'||qType=='tiankong'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+      <view class="problem-concent-tr {{index==0?'tr1':''}} {{examineFlag==0?'b1':''}}">
+        <view class='table-name1'>{{item.content}}</view>
+      </view>
+      <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+  <view class='problem-concent' wx:if="{{qType=='pingfen'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+     <view class="problem-concent-tr {{index==0?'tr1':''}} {{examineFlag==0?'b1':''}}">
+        <view class='table-name1'>{{item.fen}}</view>
+      </view>
+       <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+  <view class='problem-concent' wx:if="{{qType=='position'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+      <view class="problem-concent-tr {{index==0?'tr1':''}} {{examineFlag==0?'b1':''}}">
+        <view class='table-name1'>{{item.address}}</view>
+      </view>
+       <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+  <view class='problem-concent' wx:if="{{qType=='location'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+      <view class="problem-concent-tr {{index==0?'tr1':''}} {{examineFlag==0?'b1':''}}">
+        <view class='table-name1'>{{item.addressDesc}}</view>
+      </view>
+      <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+
+  <view class='problem-concent' wx:if="{{qType=='wenjian'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+      <view class="problem-concent-tr {{index==0?'tr1':''}} {{examineFlag==0?'b1':''}}">
+        <view class='table-name1'>{{problemId}}\{{item.filePath}}</view>
+      </view>
+       <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+   <view class='problem-concent' wx:if="{{qType=='tupian'}}">
+    <block wx:for="{{answerVo}}" wx:for-item="item" wx:key='index'>
+      <view class="problem-concent-tupian {{index==0?'tr1':''}}">
+          <image src='{{host+item.imgPath}}' bindtap='downloadSaveFile' data-url='{{item.imgPath}}'></image>
+      </view>
+        <view class="problem-concent-df" wx:if="{{examineFlag==1}}">
+        <block wx:for="{{numList}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+          <view class="df {{dafen[index].obtain>=item2?'on':''}}" bindtap="pingfen" data-aid="{{item.id}}" data-index="{{index}}" data-fen="{{item2}}" wx:if="{{item.score>=item2}}">{{item2}}</view>
+        </block>
+      </view>
+    </block>
+  </view> 
+   
+</view>
+<view class='zhanwei' w:if="{{examineFlag==1}}"></view>
+<view class='addbtns' w:if="{{examineFlag==1}}">
+  <view class='addbtn' bindtap='dtijiao'>
+    提交打分
+  </view>
+</view>

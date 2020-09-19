@@ -1,0 +1,2 @@
+/* pages/my/join/join.wxss */
+@import "../../my/created/created.wxss";

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.basics.dao.BasicsFileMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.basics.entity.BasicsFile" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+    <result column="realName" property="realName" jdbcType="VARCHAR" />
+    <result column="uniName" property="uniName" jdbcType="VARCHAR" />
+    <result column="filePath" property="filePath" jdbcType="VARCHAR" />
+    <result column="fileType" property="fileType" jdbcType="VARCHAR" />
+    <result column="imgFlag" property="imgFlag" jdbcType="INTEGER" />
+    <result column="surface" property="surface" jdbcType="VARCHAR" />
+    <result column="nature" property="nature" jdbcType="VARCHAR" />
+    <result column="surfaceId" property="surfaceId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, createTime, state, realName, uniName, filePath, fileType, imgFlag, surface,
+    nature, surfaceId
+  </sql>
+  <sql id="Base_name" >
+    basics_file
+  </sql>
+  <sql id="orderAttr" >
+    id
+  </sql>
+
+  <!--<insert id="insert" parameterType="cn.csl.basics.entity.BasicsFile" keyProperty="id" useGeneratedKeys="true">>-->
+    <!--insert into manage_api (id, state, createTime)-->
+    <!--values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})-->
+  <!--</insert>-->
+
+
+  <insert id="insert" parameterType="cn.csl.basics.entity.BasicsFile" keyProperty="id" useGeneratedKeys="true">
+    insert into basics_file (id, createTime, state,
+      realName, uniName, filePath,
+      fileType, imgFlag, surface,
+      nature, surfaceId)
+    values (#{id,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{state,jdbcType=INTEGER},
+      #{realName,jdbcType=VARCHAR}, #{uniName,jdbcType=VARCHAR}, #{filePath,jdbcType=VARCHAR},
+      #{fileType,jdbcType=VARCHAR}, #{imgFlag,jdbcType=INTEGER}, #{surface,jdbcType=VARCHAR},
+      #{nature,jdbcType=VARCHAR}, #{surfaceId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.basics.entity.BasicsFile" >
+    update basics_file
+    set
+      state = #{state,jdbcType=INTEGER},
+      realName = #{realName,jdbcType=VARCHAR},
+      uniName = #{uniName,jdbcType=VARCHAR},
+      filePath = #{filePath,jdbcType=VARCHAR},
+      fileType = #{fileType,jdbcType=VARCHAR},
+      imgFlag = #{imgFlag,jdbcType=INTEGER},
+      surface = #{surface,jdbcType=VARCHAR},
+      nature = #{nature,jdbcType=VARCHAR},
+      surfaceId = #{surfaceId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+  <delete id="deleteByPrimaryKey"  parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.sql != null and tableUploadUtil.sql != ''">
+      ${ tableUploadUtil.sql}
+    </if>
+    <if test="tableUploadUtil.searchdetail != null and tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY <include refid="orderAttr" /> DESC
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+  <select id="listByAttrValueMap" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where state = #{state,jdbcType=INTEGER}  ${attrValueMap}
+    ORDER BY <include refid="orderAttr" /> DESC
+  </select>
+
+
+
+</mapper>

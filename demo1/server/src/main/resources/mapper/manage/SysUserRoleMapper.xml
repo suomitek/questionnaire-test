@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.manage.dao.SysUserRoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.manage.entity.SysUserRole" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="roleId" property="roleId" jdbcType="BIGINT" />
+    <result column="userId" property="userId" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleId, userId,state
+  </sql>
+  <sql id="Base_name" >
+    manage_user_role
+  </sql>
+  <insert id="insert" parameterType="cn.csl.manage.entity.SysUserRole" >
+    insert into <include refid="Base_name" /> (id, roleId, userId,state
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+  <delete id="deleteByUserId" parameterType="java.lang.Long" >
+    delete from <include refid="Base_name" />
+    where userId = #{userId,jdbcType=BIGINT}
+  </delete>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.manage.entity.SysUserRole" >
+    update <include refid="Base_name" />
+    set roleId = #{roleId,jdbcType=BIGINT},
+      userId = #{userId,jdbcType=BIGINT},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listRolesByUserId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where userId = #{userId,jdbcType=BIGINT} and state=1
+      ORDER BY id DESC
+  </select>
+  <select id="listRolesByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where roleId = #{roleId,jdbcType=BIGINT} and state=1
+      ORDER BY id DESC
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="listByAttribute" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where ${attribute} = #{checkVal,jdbcType=VARCHAR} and state = #{state,jdbcType=INTEGER}
+      ORDER BY id DESC
+  </select>
+  <select id="getCount" resultType="java.lang.Long">
+    select
+    count(*)
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.searchdetail != ''">
+      and ${ tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+      ORDER BY id DESC
+  </select>
+  <select id="listPageObjs" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from <include refid="Base_name" />
+    where state = 1
+    <if test="tableUploadUtil.searchdetail != ''">
+      and ${tableUploadUtil.searchdeAttribute} LIKE CONCAT(CONCAT('%', #{tableUploadUtil.searchdetail,jdbcType=VARCHAR}),'%')
+    </if>
+    ORDER BY id DESC
+    limit #{tableUploadUtil.start},#{tableUploadUtil.length}
+  </select>
+</mapper>

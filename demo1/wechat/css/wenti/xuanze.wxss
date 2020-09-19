@@ -1,0 +1,162 @@
+.input-group{
+  width: 90vw;
+  padding: 20rpx 5vw;
+  background-color: #fff; 
+}
+.tip-switch{
+  justify-content: space-between;
+}
+.tip-switch-left{
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+}
+.tip,.tip-switch{
+  width: 100%;
+  height: 50rpx;
+  padding: 10rpx 0;
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+}
+.tip-title{
+  height: 40rpx;
+  color: #000;
+  margin-left:20rpx;
+  font-size: 33rpx;
+  display: flex;
+  align-items: center;
+}
+.tip-switch-right{
+  text-align: right;
+}
+.txt{
+  font-size: 31rpx;
+  padding: 10rpx 0;
+} 
+
+
+
+.border-t{
+  border-top:solid #bfbfbf 1rpx;
+}
+.border-b{
+  border-bottom:solid #bfbfbf 1rpx;
+}
+
+textarea {
+  width: 86vw;
+  height: 20vw;
+  /* border:solid #bfbfbf 1rpx; */
+  padding: 2vw;
+  border-radius: 10rpx;
+  background-color: #f1f1f1;
+}
+
+.img{
+  height:50rpx;
+  width:50rpx;
+}
+.placeholderStyle{
+  color: #999;
+}
+.xuanxiang-group{
+  width: 90vw;
+  padding: 10rpx 5vw;
+  display: flex;
+  flex-flow: nowrap;
+  align-items: center;
+  background-color: #fff; 
+}
+.juzhong{
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+.anniu{
+  width: 8vw;
+}
+.shurukuang{
+  width: 62vw;
+  border-radius: 10rpx;
+  background-color: #f1f1f1;
+  padding: 10rpx;
+  font-size: 30rpx;
+}
+.tupian{
+  width: 10vw;
+  margin-left: 4vw;
+  margin-top: 15rpx;
+}
+.img2{
+  height:60rpx;
+  width:60rpx;
+}
+.daan{
+  width: 8vw;
+  display: flex;
+  align-items: center;
+  margin-left: 3vw;
+}
+
+.addBtn{
+  width:50rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  font-size: 35rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tip-icon{
+  width: 35rpx;
+  height: 35rpx;
+}
+.tip-switch-right{
+  width: 20vw;
+  display: flex;
+  justify-content:center;
+}
+.w100h20{
+  width: 100vw;
+  height: 20rpx;
+  background-color: #f3f3f3;
+}
+.title{
+  width: 80vw;
+  padding: 10rpx 10vw;
+  display: flex;
+  justify-content: center;
+  color: #666;
+  background-color: #fff; 
+}
+
+
+.btn-group{
+  width: 90vw;
+  height: 10vw;
+  padding: 20rpx 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  background-color: #fff; 
+}
+.addBtn{
+  width:50rpx;
+  height:50rpx;
+  line-height: 50rpx;
+  font-size: 35rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn{
+  width: 30vw;
+  height: 100%;
+  margin-left: 10vw;
+}
+.btn:nth-child(1){
+  margin-left: 0;
+}

@@ -1,0 +1,80 @@
+<!--pages/add/addwenjuan/question/duoxuan.wxml-->
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>多选题题目</view>
+    </view>
+    <view class='tip-switch-right' data-id="1">
+      <image src='{{xuanze.cover.length == 0?"../../../../imgs/add/tupian_icon.png":host+xuanze.cover[0]}}' class='img' bindtap="previewImage" data-count='1' data-index='-1' data-attr='cover' ></image>
+    </view>
+  </view>
+  <view class='txt'>
+    <textarea placeholder='请输入题目' value='{{xuanze.name}}' data-attr='name' bindinput="bindXuanZeKeyInput" placeholder-class="placeholderStyle" maxlength='1024'></textarea>
+  </view>
+</view>
+<view class='w100h20'></view>
+<view class='title' hidden=''>
+  选项
+</view>
+<checkbox-group bindchange="checkboxChange">
+<block wx:for="{{xuanze.choices}}" wx:for-item="item" wx:key='index' hidden="">
+  <view class='xuanxiang-group'>
+    <view class='anniu juzhong' data-index='{{index}}' bindtap='shanchu'>
+      <image src='../../../../imgs/add/jian.png' class='tip-icon'></image>
+    </view>
+    <view class='shurukuang juzhong'>
+      <input maxlength="20" value='{{item.name}}'  data-attr='name' data-index='{{index}}' bindinput="bindXuangXiangKeyInput"  placeholder="请输入选项内容" placeholder-class="placeholderStyle" />
+    </view>
+    <view class='tupian ' data-id="1" >
+      <image src='{{item.cover.length == 0?"../../../../imgs/add/tupian_icon.png":host+item.cover[0]}}' class='img2' bindtap="previewImage2" data-count='1' data-index='{{index}}' data-attr='cover' ></image>
+    </view>
+    <view class='daan juzhong' data-id="1">
+      <checkbox value="{{index}}" checked="{{item.flag}}"/>
+    </view>
+  </view>
+</block>
+</checkbox-group>
+<view class='title'>
+  <view class='btnBg addBtn' bindtap="tianjia" >+</view>
+</view>
+
+<view class='w100h20'></view>
+<view class='title'>
+  设置
+</view>
+<view class='input-group border-t border-b'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/chongfu_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>必答题</view>
+    </view>
+    <view class='tip-switch-right'>
+      <switch wx:if="{{xuanze.must==0}}"  bindchange="changeSwitch" data-attr='must'/>
+      <switch wx:if="{{xuanze.must==1}}" checked bindchange="changeSwitch" data-attr='must'/>
+    </view>
+  </view>
+</view>
+<view class='input-group border-b' wx:if="{{xuanze.examineFlag==1}}">
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/chongfu_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>分值</view>
+    </view>
+    <view class='tip-switch-right' style='width:25vw'>
+      <view class="number-group">
+        <picker bindchange="changeFen"  value="{{xuanze.scoreIndex}}" range="{{numList}}">
+         <text decode='true'>&nbsp;&nbsp;&nbsp;{{numList[xuanze.scoreIndex]}}&nbsp;&nbsp;&nbsp;</text>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='btn-group'>
+  <view class='btn btnBg' bindtap="timuSave">
+      确认
+  </view>
+</view>
+
+

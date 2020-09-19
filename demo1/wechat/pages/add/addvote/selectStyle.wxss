@@ -1,0 +1,44 @@
+/* pages/add/addvote/selectStyle.wxss */
+
+.yangshilist{
+  width: 90vw;
+  padding: 10vw 5vw 0 5vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+.yangshi{
+  width: 39vw;
+  height: 39vw;
+  background-color: #fff;
+  border-radius: 20rpx;
+  padding: 2vw;
+  margin-top: 4vw; 
+}
+.yangshi:nth-child(2n){
+  margin-left: 4vw;
+}
+.yangshi:nth-child(1){
+  margin-top: 0; 
+}
+.yangshi:nth-child(2){
+  margin-top: 0; 
+}
+
+.yangshi_img,.yangshi_title,.yangshi_desc{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.img{
+  width: 20vw;
+  height: 20vw;
+}
+.yangshi_title{
+  font-size: 35rpx;
+  padding: 1vw 0;
+}
+.yangshi_desc{
+  font-size: 30rpx;
+  color: #a2a2a2;
+  padding: 1vw 0;
+}

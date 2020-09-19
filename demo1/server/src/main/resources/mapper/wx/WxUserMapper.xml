@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.wx.dao.WxUserMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.wx.entity.WxUser" ></resultMap>
+  <sql id="Base_name" >
+    wx_user
+  </sql>
+  <insert id="insert" parameterType="cn.csl.wx.entity.WxUser" useGeneratedKeys="true" keyProperty="id">
+    insert into wx_user (id, state, createTime, 
+      nickName, openid, avatarUrl, 
+      country, province, city,
+      realName, phone, gender,userType,
+      subscriberId
+      )
+    values (#{id,jdbcType=BIGINT}, #{state,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+      #{nickName,jdbcType=VARCHAR}, #{openid,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR},
+      #{realName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER},
+      #{userType,jdbcType=VARCHAR},#{subscriberId,jdbcType=BIGINT}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="cn.csl.wx.entity.WxUser" >
+    update <include refid="Base_name" />
+    set
+    subscriberId = #{subscriberId,jdbcType=BIGINT},
+    nickName = #{nickName,jdbcType=VARCHAR},
+    userType = #{userType,jdbcType=VARCHAR},
+    openid = #{openid,jdbcType=VARCHAR},
+    avatarUrl = #{avatarUrl,jdbcType=VARCHAR},
+    realName = #{realName,jdbcType=VARCHAR},
+    country = #{country,jdbcType=VARCHAR},
+    province = #{province,jdbcType=VARCHAR},
+    city = #{city,jdbcType=VARCHAR},
+    phone = #{phone,jdbcType=VARCHAR},
+    gender = #{gender,jdbcType=INTEGER},
+    state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select *
+    from <include refid="Base_name" />
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="loadByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select *
+    from <include refid="Base_name" />
+    where openid = #{openid,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

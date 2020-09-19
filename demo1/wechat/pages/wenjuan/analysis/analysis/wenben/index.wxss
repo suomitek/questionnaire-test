@@ -1,0 +1,154 @@
+/* pages/wenjuan/analysis/analysis/wenben/index.wxss */
+page{
+   background-color: #fff;
+}
+.problem{
+  width: 90%;
+  margin: 0 5%;
+  padding-top: 20rpx;
+}
+.problem:nth-child(1){
+  padding-top: 30rpx;
+}
+.problem:nth-last-child(1){
+  padding-bottom: 30rpx;
+}
+.problem-name{
+  width: 100%;
+  padding: 10rpx 0;
+  font-size: 29rpx;
+  color: #333;
+  background-color: #f6f6f6;
+}
+.tihao{
+  color: #000;
+  font-weight: 600;
+}
+.renshu{
+  color: #939393;
+  font-size: 25rpx;
+}
+.problem-concent{
+  width: 100%;
+  
+}
+
+.problem-concent-desc{
+  width: 20vw;
+  display: flex;
+  justify-content: center;
+  font-size: 26rpx;
+  padding: 5rpx 0;
+  border-radius: 20rpx;
+  border:2rpx dashed #1296db;
+  color: #1296db;
+  margin: 0 5vw;
+}
+.dc{
+  display: flex;
+  justify-content: flex-end;
+}
+.tr1{
+  border-top:1rpx solid #999; 
+}
+
+.problem-concent-tr{
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  /* border-bottom:1rpx solid #999;  */
+  font-size: 33rpx;
+  color: #666;
+}
+.b1{
+  border-bottom:1rpx solid #999;
+}
+.problem-concent-df{
+  width: 100%;
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  border-bottom:1rpx solid #999; 
+}
+.problem-concent-df .df{
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+  /* border: 1rpx solid #1262db;
+  color: #1262db; */
+  border: 1rpx solid #888;
+  color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20rpx;
+  font-size: 29rpx;
+  background-color: #fff;
+}
+.problem-concent-df .on{
+  background-color: #1296db;
+  color: #fff;
+   border: 1rpx solid #fff;
+}
+
+.table-name1{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 90%;
+  padding: 0 5%;
+}
+
+.daan{
+  font-size: 20rpx;
+  color: #f00;
+}
+.problem-concent-tupian{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.problem-concent-tupian image{
+  width: 100%;
+  display: block;
+  margin-top: 2vw;
+  border-radius: 30rpx;
+  min-height: 10vw;
+  max-height: 90vh;
+}
+.problem-concent-tupian2 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.problem-concent-tupian2 image{
+  width: 15vw;
+  height: 15vw;
+  display: block;
+  margin: 2vw 0 0 2vw;
+}
+.zhanwei{
+  width: 100%;
+  height: 30rpx;
+}
+.addbtns{
+  width: 100vw;
+  padding: 15rpx 0;
+  display: flex;
+  justify-content: center;
+}
+.addbtn{
+  width: 60vw;
+  padding: 20rpx 0;
+
+  color: #656565;
+  display: flex;
+  justify-content: center;
+  font-size: 30prx;
+  border: 2rpx dashed rgb(163, 163, 163);
+}

@@ -1,0 +1,82 @@
+/* pages/vote/candidate.wxss */
+@import "/css/input.wxss";
+@import "/css/btn.wxss";
+page{
+  background-color: #fff;
+  padding-bottom: 100rpx;
+}
+.candidate{
+  width: 100vw;
+}
+.voteName,.name{
+  width: 90vw;
+  padding: 0 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 35rpx;
+  margin: 15rpx 0;
+}
+.name{
+  padding-top: 4vw;
+  font-weight: 600;
+}
+.voteName{
+  padding-bottom: 2vw;
+  padding-top: 2vw;
+  font-size: 28rpx;
+  color: #737373;
+}
+
+.info{
+  width: 90vw;
+  margin: 0 5vw;
+  padding: 2vw 0;
+  display: flex;
+  justify-content: center;
+  border-top: 2rpx dashed #ccc;
+  border-bottom: 2rpx dashed #ccc;
+}
+.info-item-top,.info-item-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.info-item-top{
+  font-size: 35rpx;
+  font-weight: 600;
+}
+.info-item-bottom{
+  color: #737373;
+  font-size: 30rpx;
+}
+
+.info-item{
+  width: 33%;
+}
+
+.cover{
+  width: 90vw;
+  margin: 0 5vw;
+  padding: 5vw 0;
+  border-bottom: 2rpx dashed #ccc;
+}
+
+.cover image{
+  width: 90%;
+  margin: 0 5%;
+}
+
+
+.btn-group{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-size: 30rpx;
+  font-weight: 600;
+}
+.btn{
+  width: 25vw;
+  height: 10vw;
+  margin-left: 8vw;
+}

@@ -1,0 +1,55 @@
+<!--pages/add/addvote/addCandidate.wxml-->
+<view class='cover' wx:if="{{voteType==0||voteType==2}}">
+  <image src='{{candidate.cover[0] == ""?"../../../imgs/fengmian.png":host+candidate.cover[0]}}' class='fengmian'></image>
+  <view class='img-up-btn' bindtap="previewImage" data-count='1' data-index='0' data-attr='cover' >自定义封面</view>
+</view>
+<view class='line'></view>
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>参赛名称</view>
+    </view>
+    <view class='tip-switch-right'>
+      <input maxlength="20" value='{{candidate.name}}' data-attr='name' bindinput="bindKeyInput" placeholder="请输入参赛名称" placeholder-class="placeholderStyle" />
+    </view>
+  </view>
+</view>
+<view class='input-group' wx:if="{{voteType==1||voteType==2}}">
+  <view class='tip'>
+    <image src='../../../imgs/add/jieshao_icon.png' class='tip-icon'></image>
+    <view class='tip-title'>文字介绍</view>
+  </view>
+  <view class='txt'>
+    <textarea placeholder='请输入投票介绍' value='{{candidate.introduce}}' data-attr='introduce' bindinput="bindKeyInput" placeholder-class="placeholderStyle" maxlength='1024'></textarea>
+  </view>
+</view>
+
+<view class='input-group' style=' border:none' wx:if="{{voteType==0||voteType==2}}">
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../imgs/add/zhuti_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>图片介绍</view>
+    </view>
+    <view class='tip-switch-right'>
+      <view class='btnBg addBtn' bindtap="previewImage" data-count='1' data-index='-1'
+       data-attr='imgIntroduce' data-surface="wj_candidate" data-nature="wj_candidate">+</view>
+    </view>
+  </view>
+</view>
+<block wx:for="{{candidate.imgIntroduce}}" wx:for-item="item" wx:key='index'  wx:if="{{voteType==0||voteType==2}}">
+  <view class='img-group'>
+    <image src='{{host+item}}' mode="widthFix" class='img-group-Img'></image>
+    <view class='img-group-btns'>
+      <view class='img-group-edit' bindtap="previewImage" data-count='1' data-index='{{index}}' data-attr='imgIntroduce' >编辑</view>
+      <view class='img-group-del' bindtap="fileImgDelete" data-count='1' data-index='{{index}}' data-attr='imgIntroduce'>删除</view>
+    </view>
+  </view>
+</block>
+<view class='line'  wx:if="{{voteType==0||voteType==2}}"></view>
+<view class='btn-group' bindtap='baocun'>
+  <view class='btn btnBg'>
+      确定
+  </view>
+</view>
+

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- Redis连接池的设置 -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!-- 控制一个pool可分配多少个jedis实例 -->
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <!-- 连接池中最多可空闲maxIdle个连接 ，这里取值为20，表示即使没有数据库连接时依然可以保持20空闲的连接，而不被清除，随时处于待命状态。 -->
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <!-- 最大等待时间:当没有可用连接时,连接池等待连接被归还的最大时间(以毫秒计数),超过时间则抛出异常 -->
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <!-- 在获取连接的时候检查有效性 -->
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+
+    <!-- 创建Redis连接池，并做相关配置 -->
+    <bean id="jedisWritePool" class="cn.csl.manage.redis.JedisPoolWriper"
+          depends-on="jedisPoolConfig">
+        <constructor-arg index="0" ref="jedisPoolConfig" />
+        <constructor-arg index="1" value="${redis.hostname}" />
+        <constructor-arg index="2" value="${redis.password}" />
+        <constructor-arg index="3" value="${redis.port}" type="int" />
+        <constructor-arg index="4" value="${redis.timeout}" type="int" />
+        <constructor-arg index="5" value="${redis.database}" type="int" />
+    </bean>
+
+    <!-- 创建Redis工具类，封装好Redis的连接以进行相关的操作 -->
+    <bean id="jedisUtil" class="cn.csl.manage.redis.JedisUtil">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+        <property name="KEYS">
+            <ref bean="KEYS" />
+        </property>
+        <property name="HASH">
+            <ref bean="HASH" />
+        </property>
+        <property name="SETS">
+            <ref bean="SETS" />
+        </property>
+        <property name="LISTS">
+            <ref bean="LISTS" />
+        </property>
+        <property name="STRINGS">
+            <ref bean="STRINGS" />
+        </property>
+    </bean>
+    <!-- Redis的key操作 -->
+    <bean id="KEYS" class="cn.csl.manage.redis.utils.Keys"
+        scope="singleton">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+    </bean>
+    <!-- Redis的Strings操作 -->
+    <bean id="STRINGS" class="cn.csl.manage.redis.utils.Strings"
+          scope="singleton">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+    </bean>
+    <!-- Redis的Lists操作 -->
+    <bean id="LISTS" class="cn.csl.manage.redis.utils.Lists"
+        scope="singleton">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+    </bean>
+    <!-- Redis的Sets操作 -->
+    <bean id="SETS" class="cn.csl.manage.redis.utils.Sets"
+        scope="singleton">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+    </bean>
+    <!-- Redis的HashMap操作 -->
+    <bean id="HASH" class="cn.csl.manage.redis.utils.Hash"
+          scope="singleton">
+        <property name="jedisPool">
+            <ref bean="jedisWritePool" />
+        </property>
+    </bean>
+
+    <bean id="jedisConnFactory"
+          class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory" destroy-method="destroy">
+        <property name="hostName" value="${redis.hostname}" />
+        <property name="port" value="${redis.port}" />
+        <property name="timeout" value="${redis.timeout}" />
+        <property name="database" value="${redis.database}" />
+        <property name="password" value="${redis.password}" />
+        <property name="usePool" value="true" />
+        <property name="poolConfig" ref="jedisPoolConfig" />
+    </bean>
+
+    <!-- 设置redis消息订阅（方式2） -->
+    <bean id="messageListener"
+          class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <constructor-arg>
+            <bean class="cn.csl.manage.service.DefaultMessageDelegate" />
+        </constructor-arg>
+    </bean>
+    <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+        <property name="connectionFactory" ref="jedisConnFactory" />
+        <property name="messageListeners">
+            <map>
+                <entry key-ref="messageListener">
+                    <list>
+                        <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                            <constructor-arg value="__keyevent@1__:expired" />
+                        </bean>
+                        <bean class="org.springframework.data.redis.listener.PatternTopic">
+                            <constructor-arg value="*" />
+                        </bean>
+                        <bean class="org.springframework.data.redis.listener.PatternTopic">
+                            <constructor-arg value="'__key*__:*" />
+                        </bean>
+                    </list>
+                </entry>
+            </map>
+        </property>
+    </bean>
+</beans>

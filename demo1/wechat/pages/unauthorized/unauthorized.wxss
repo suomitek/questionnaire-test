@@ -1,0 +1,20 @@
+/* pages/unauthorized/unauthorized.wxss */
+page{
+  width: 90vw;
+  padding: 15vh 5vw 0 5vw;
+}
+.imgDiv,.msg,.url{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.msg{
+  margin-top: 20rpx;
+  color: #5bb198;
+  font-size: 35rpx;
+}
+.url{
+  margin-top: 20rpx;
+  font-size: 30rpx;
+   margin-bottom: 20rpx;
+}

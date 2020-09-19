@@ -1,0 +1,106 @@
+<!--pages/add/addvote/listCandidate.wxml-->
+<view class="headerTab">
+  <block wx:for="{{swiperTitle}}" wx:key="">
+    <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
+    bindtap="turnPage">{{item.text}}</view>
+  </block> 
+</view>
+<view class='addview'>
+  <view class='title'>添加选项</view>
+  <view class='btnBg addBtn' bindtap="addCandidate" >+</view>
+</view>
+  
+<view class='tab-box'>
+  <view class="list-box {{currentPage == 0 ? '' : 'hide'}}">
+    <view class='candidateList'>
+      <block wx:for="{{candidates}}" wx:for-item="item" wx:key='index'>
+        <view class='candidate2' wx:if="{{item.useFlag==0&&item.voteType==1}}" data-list="candidateVo2s">
+          <!-- 文字 -->
+          <view class='candidate2-name'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+            <view class='btnBg addBtn' bindtap="editCandidate" data-useflag='1' data-index='{{index}}'>通过</view>
+            <view class='btnBgRed addBtn' bindtap="editCandidate" data-useflag='-1' data-index='{{index}}'>拒绝</view>
+          </view>
+        </view>
+        <view class='candidate2' wx:if="{{item.useFlag==0&&item.voteType!=1}}" data-list="candidateVo2s">
+          <!-- 图文 -->
+          <view class='candidate2-num'>
+            <image src='{{host+item.covers[0]}}' class='icon'/>
+            <text wx:if="{{index>2}}">{{index}}</text>
+          </view>
+          <view class='candidate2-name'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+            <view class='btnBg addBtn' bindtap="editCandidate" data-useflag='1' data-index='{{index}}'>通过</view>
+            <view class='btnBgRed addBtn' bindtap="editCandidate" data-useflag='-1' data-index='{{index}}'>拒绝</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="list-box {{currentPage == 1 ? '' : 'hide'}}">
+    <view class='candidateList'>
+      <block wx:for="{{candidates}}" wx:for-item="item" wx:key='index'>
+        <view class='candidate2' wx:if="{{item.useFlag==1&&item.voteType==1}}" data-list="candidateVo2s">
+          <!-- 文字 -->
+          <view class='candidate2-name'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+          </view>
+        </view>
+        <view class='candidate2' wx:if="{{item.useFlag==1&&item.voteType!=1}}" data-list="candidateVo2s">
+          <!-- 图文 -->
+          <view class='candidate2-num'>
+            <image src='{{host+item.covers[0]}}' class='icon'/>
+          </view>
+          <view class='candidate2-name w70'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <view class="list-box {{currentPage == 2 ? '' : 'hide'}}">
+    <view class='candidateList'>
+      <block wx:for="{{candidates}}" wx:for-item="item" wx:key='index'>
+        <view class='candidate2' wx:if="{{item.useFlag==-1&&item.voteType==1}}" data-list="candidateVo2s">
+          <!-- 文字 -->
+          <view class='candidate2-name'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+            <view class='btnBg addBtn' bindtap="editCandidate" data-useflag='1' data-index='{{index}}'>通过</view>
+          </view>
+        </view>
+        <view class='candidate2' wx:if="{{item.useFlag==-1&&item.voteType!=1}}" data-list="candidateVo2s">
+          <!-- 图文 -->
+          <view class='candidate2-num'>
+            <image src='{{host+item.covers[0]}}' class='icon'/>
+            <text wx:if="{{index>2}}">{{index}}</text>
+          </view>
+          <view class='candidate2-name'>
+            <view>{{item.name}}</view>
+            <view class='candidate2-time'>{{item.createTimeStr}}</view>
+          </view>
+          <view class='candidate-btn' style=''>
+            <view class='btnBg addBtn' bindtap="editCandidate" data-useflag='1' data-index='{{index}}'>通过</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  
+</view>

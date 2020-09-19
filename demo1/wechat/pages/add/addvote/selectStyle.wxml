@@ -1,0 +1,24 @@
+<!--pages/add/addvote/selectStyle.wxml-->
+<view class='yangshilist'>
+  <view class='yangshi' bindtap='selectStyle' data-index='0'>
+    <view class='yangshi_img'>
+      <image src='../../../imgs/tupian.png' class='img'></image>
+    </view>
+    <view class='yangshi_title'>图片</view>
+    <view class='yangshi_desc'>候选项为图片</view>
+  </view>
+  <view class='yangshi' bindtap='selectStyle' data-index='1'>
+    <view class='yangshi_img'>
+      <image src='../../../imgs/wenzi.png' class='img'></image>
+    </view>
+    <view class='yangshi_title'>文字</view>
+    <view class='yangshi_desc'>候选项为文字</view>
+  </view>
+    <view class='yangshi' bindtap='selectStyle' data-index='2'>
+    <view class='yangshi_img'>
+      <image src='../../../imgs/tuwen.png' class='img'></image>
+    </view>
+    <view class='yangshi_title'>图文</view>
+    <view class='yangshi_desc'>候选项为图文结合</view>
+  </view>
+</view>

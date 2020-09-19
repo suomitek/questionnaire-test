@@ -1,0 +1,75 @@
+<!--pages/my/xinxi/xinxi.wxml-->
+
+<view class='title'>
+  基本信息
+</view>
+<view class='infos'>
+  <view class='info'>
+    <view class='info-left'>
+      昵称
+    </view>
+    <view class='info-rigth'>
+      <view>{{wxUserInfo.nickName}}</view>
+      <view class='icon'>
+      </view>
+    </view>
+  </view>
+  <view class='info'>
+    <view class='info-left'>
+      性别
+    </view>
+    <view class='info-rigth'>
+      <view wx:if="{{wxUserInfo.gender==1}}">男</view>
+      <view wx:if="{{wxUserInfo.gender==0}}">女</view>
+       <view wx:if="{{wxUserInfo.gender==-1}}">未知</view>
+      <view class='icon'>
+      </view>
+    </view>
+  </view>
+  <view class='info'>
+    <view class='info-left'>
+      地址
+    </view>
+    <view class='info-rigth'>
+      <view>{{wxUserInfo.province}}-{{wxUserInfo.city}}</view>
+      <view class='icon'>
+      </view>
+    </view>
+  </view>
+  <view class='info'>
+    <view class='info-left'>
+      真实姓名
+    </view>
+    <view class='info-rigth' bindtap='showInputCode' data-attr='realName' data-title="真实姓名" data-val="{{wxUserInfo.realName}}">
+      <view wx:if="{{wxUserInfo.realName!=null}}">{{wxUserInfo.realName}}</view>
+      <view wx:if="{{wxUserInfo.realName==null}}">点击修改</view>
+      <view class='icon'>
+        <image src='../../../imgs/kai.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='info'>
+    <view class='info-left'>
+      电话
+    </view>
+    <view class='info-rigth' bindtap='showInputCode' data-attr='phone' data-title="电话" data-val="{{wxUserInfo.phone}}">
+      <view wx:if="{{wxUserInfo.phone!=null}}">{{wxUserInfo.phone}}</view>
+      <view wx:if="{{wxUserInfo.realName==null}}">点击修改</view>
+      <view class='icon'>
+        <image src='../../../imgs/kai.png'></image>
+      </view>
+    </view>
+  </view>
+  <view class='btn-group'>
+    <view class='btn btnBg' bindtap="baocun">
+        保存
+    </view>
+  </view>
+</view>
+
+
+<modal hidden="{{inputCode}}" title="{{title}}" confirm-text="提交" cancel-text="取消" bindconfirm="model2confirm" bindcancel="model2cancel" 
+confirm-color="#007aff">
+    <input placeholder='请输入{{title}}' value='{{val}}' bindinput='input' data-attr='{{attr}}' style='width: 100%'/>
+</modal>
+ 

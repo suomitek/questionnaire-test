@@ -1,0 +1,72 @@
+/* pages/templates/question/xuanze.wxss */
+
+.xuanzeti{
+  width: 100%;
+  border-radius: 100prx;
+  background-color: #fff;
+  font-size: 30rpx;
+}
+.timu{
+  width: 90%;
+  padding: 20rpx 5%;
+  display: flex;
+  flex-flow: nowrap;
+  color: #444;
+}
+
+.bixuan{
+  color: red;
+}
+.timucover{
+  width: 90%;
+  margin:0 5%;
+}
+.timufengmian{
+  width: 100%;
+  border-radius: 20rpx;
+}
+
+.xuanxiang{
+  width: 90%;
+  color: #666;
+  margin: 0 5%;
+  padding: 10rpx 0;
+  border-bottom: 2rpx dashed #c5c5c5;
+}
+.xuanxiang-top{
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 10rpx 0;
+}
+.xuanxiang-left{
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.xuanxiang-rigth{
+  width: 85%;
+}
+.xuanxiang-bottom{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.xuangxiangtu{
+  width: 80%;
+  border-radius: 30rpx;
+}
+.error-msg{
+  width: 90%;
+  padding: 8rpx 0;
+  margin: 15rpx 5% 0 5%;
+  border-radius: 10rpx;
+  /* border: 1rpx #ff8787 solid; */
+  background-color: #fdcfcf;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size:25rpx;
+  color: #f00;
+}

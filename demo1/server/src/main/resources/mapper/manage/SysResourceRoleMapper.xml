@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.csl.manage.dao.SysResourceRoleMapper" >
+  <resultMap id="BaseResultMap" type="cn.csl.manage.entity.SysResourceRole" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="roleId" property="roleId" jdbcType="BIGINT" />
+    <result column="resourceId" property="resourceId" jdbcType="BIGINT" />
+    <result column="state" property="state" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="SysUrlRoleMap" type="cn.csl.manage.model.SysUrlRole" >
+    <result column="roleName" property="roleName" jdbcType="VARCHAR" />
+    <result column="resUrl" property="resUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, roleId, resourceId, state
+  </sql>
+  <sql id="Base_name" >
+    manage_resource_role
+  </sql>
+  <insert id="insert" parameterType="cn.csl.manage.entity.SysResourceRole" >
+    insert into <include refid="Base_name" /> (id, roleId, resourceId,
+      state)
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{resourceId,jdbcType=BIGINT},
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <delete id="deleteByRoleId" parameterType="java.lang.Long">
+        delete from <include refid="Base_name" /> where roleId = #{roleId,jdbcType=BIGINT}
+  </delete>
+  <select id="listResourceRoleByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where roleId = #{roleId,jdbcType=BIGINT} and state=1
+      ORDER BY id DESC
+  </select>
+  <select id="listResourceRoleByResourceId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from <include refid="Base_name" />
+    where resourceId = #{resourceId,jdbcType=BIGINT} and state=1
+      ORDER BY id DESC
+  </select>
+  <select id="listAllUrlRole" resultMap="SysUrlRoleMap">
+    SELECT DISTINCT  mre.resUrl ,mro.roleName
+    FROM manage_resource_role mrr,manage_resource mre,manage_role mro
+    WHERE mre.resUrl IS NOT NULL
+    AND mre.resUrl!=''
+    AND mro.state!=0
+    AND mre.state!=0
+    AND mrr.resourceId = mre.id
+    AND mrr.roleId = mro.id
+    ORDER BY mre.resUrl
+  </select>
+</mapper>

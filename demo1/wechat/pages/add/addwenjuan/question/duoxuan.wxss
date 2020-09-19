@@ -1,0 +1,14 @@
+/* pages/add/addwenjuan/question/duoxuan.wxss */
+@import "/css/wenti/xuanze.wxss";
+page{
+  /* color: #f1f1f1; */
+}
+.number-group{
+  display: table;
+  table-layout: fixed;
+  width: 200rpx;
+  text-align: center;
+  border-radius: 6px;
+  border: 1px solid #bbb;
+  overflow: hidden;
+}

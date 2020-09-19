@@ -1,0 +1,98 @@
+{
+  "pages": [
+    "pages/wenjuanList/wenjuanList",
+    "pages/voteList/voteList",
+    
+    "pages/my/my",
+    "pages/my/lishi/lishi",
+    "pages/my/xinxi/xinxi",
+    "pages/my/join/join",
+    "pages/my/created/created",
+
+          "pages/index/index",
+    "pages/wenjuan/analysis/analysis",
+    "pages/wenjuan/analysis/analysis/wenben/index",
+            "pages/wenjuan/analysis/analysis/list/index",
+    "pages/wenjuan/analysis/analysis/bar/index",
+    "pages/wenjuan/analysis/analysis/pie/index",
+    "pages/introduceVideo/introduceVideo",
+    "pages/edit/editwenjuan/editwenjuan",
+    "pages/wenjuan/detailed",
+
+    "pages/position/position",
+    "pages/wenjuan/xiangqin",
+   
+    "pages/add/addwenjuan/addwenjuan",
+    "pages/add/addwenjuan/question/position",
+    "pages/add/addwenjuan/question/location",
+    "pages/add/addwenjuan/question/tupian",
+    "pages/add/addwenjuan/question/wenjian",
+    "pages/add/addwenjuan/question/pingfen",
+    "pages/add/addwenjuan/question/jianda",
+    "pages/add/addwenjuan/question/tiankong",
+    "pages/add/addwenjuan/question/duoxuan",
+    "pages/add/addwenjuan/question/danxuan",
+    
+    "pages/templates/question/wenjian",
+    "pages/templates/question/location",
+    "pages/templates/question/wenben",
+    "pages/templates/question/pingfen",
+    "pages/templates/question/xuanze",
+    
+    "pages/add/addwenjuan/questionType",
+    
+    "pages/add/addvote/listCandidate",
+    "pages/vote/detailed",
+
+    "pages/vote/candidate",
+    "pages/comment/comment",
+    "pages/add/addvote/selectStyle",
+    "pages/vote/xiangqin",
+    "pages/add/addvote/addvote",
+    "pages/add/addvote/addCandidate",
+    "pages/components/addmenu/addmenu",
+    
+    "pages/unauthorized/unauthorized",
+
+    "pages/login/login",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "navigationBarTitleText": "女神问卷",
+    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#336799"
+  },
+  "tabBar": {
+    "color": "#bfbfbf",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#fff",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/wenjuanList/wenjuanList",
+        "iconPath": "pages/images/wenjuan.png",
+        "selectedIconPath": "pages/images/wenjuan-selected.png",
+        "color": "white",
+        "text": "问卷大厅"
+      },
+      {
+        "pagePath": "pages/voteList/voteList",
+        "iconPath": "pages/images/vote.png",
+        "selectedIconPath": "pages/images/vote-selected.png",
+        "text": "投票大厅"
+      },
+      {
+        "pagePath": "pages/my/my",
+        "iconPath": "pages/images/my.png",
+        "selectedIconPath": "pages/images/my-selected.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "该投票或问卷需要有地区限制"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

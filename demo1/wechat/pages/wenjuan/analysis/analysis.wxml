@@ -1,0 +1,210 @@
+<!--pages/wenjuan/analysis/analysis.wxml-->
+<view class="headerTab">
+  <block wx:for="{{swiperTitle}}" wx:key="">
+    <view class="title {{index==currentPage?'selected':''}}" data-index="{{index}}"
+    bindtap="turnPage">{{item.text}}</view>
+  </block> 
+</view>
+ <view class='tab-box'>
+    <view class="list-box {{currentPage == 0 ? '' : 'hide'}}">
+      <view class='info' style='color: {{question.themeColor}};'>
+        <view class='name'>
+          {{question.name}}
+        </view>
+        <view class='code'>
+          密码：{{question.voteCode}}
+        </view>
+        <view class='tongji'>
+          <view class='item'>
+            <view class='item-top'>
+                {{question.problemNumber}}
+            </view>
+            <view class='item-bottom'>
+                题数
+            </view>
+          </view>
+          <view class='br'></view>
+          <view class='item'>
+            <view class='item-top'>
+                {{question.answerNumber}}
+            </view>
+            <view class='item-bottom'>
+                答卷数
+            </view>
+          </view>
+          <view class='br'></view>
+          <view class='item'>
+            <view class='item-top'>
+                0
+            </view>
+            <view class='item-bottom'>
+                评论数
+            </view>
+          </view>
+          <!-- <view class='br'></view>
+          <view class='item'>
+            <view class='item-top'>
+                0
+            </view>
+            <view class='item-bottom'>
+                浏览量
+            </view>
+          </view> -->
+        </view>
+      </view>
+      <view class="jindu">
+        <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{ gauge }}"></ec-canvas>
+      </view>
+      <view class="jindu" hidden="{{!question.answerNumber>0}}">
+        <ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ line }}"></ec-canvas>
+      </view>
+      <view wx:if="{{replyMarkers.length>0}}" >
+      <map id="map"  wx:if="{{replyMarkers.length>0}}" longitude="{{replyMarkers[0].longitude}}" latitude="{{replyMarkers[0].latitude}}" scale="16" markers="{{replyMarkers}}" style="width: 100vw; height:100vw">
+          </map>
+        </view>
+    </view>
+    <view class="list-box {{currentPage == 1 ? '' : 'hide'}}">
+      <view class='info'>
+        <block wx:for="{{problems}}" wx:for-item="item" wx:key='index'>
+          <view class='problem' wx:if="{{item.qType === 'danxuan'||item.qType === 'duoxuan'}}">
+            <view class='problem-name'><text decode='true' class='tihao'>{{index+1}}.&nbsp;&nbsp;</text>{{item.name}}</view>
+            <view class='problem-fenxi'>
+              <text decode='true' class='renshu'>&nbsp;&nbsp;&nbsp;答题率{{item.lv}}%</text>
+              <text decode='true' class='renshu' wx:if="{{question.examineFlag==1}}">&nbsp;&nbsp;&nbsp;得分率:{{item.fractionLv}}%&nbsp;&nbsp;&nbsp;平均:{{item.average}}分</text>
+            </view>
+            <view class='problem-concent'>
+              <view class='problem-concent-tr tr1'>
+                <view class='table-name1'>选项</view>
+                <view class='table-name2'>人数</view>
+                <view class='table-name3'>比例</view>
+              </view>
+               <block wx:for="{{item.choices}}" wx:for-item="item2" wx:key='index2' wx:for-index="index2">
+                <view class='problem-concent-tr'>
+                  <view class='table-name1'>{{item2.name}}<text wx:if="{{item2.flag==1}}" decode='true' class='daan'>&nbsp;答案</text></view>
+                  <view class='table-name2'>{{item2.selectNum}}</view>
+                  <view class='table-name3'>{{item2.lv}}%</view>
+                </view>
+              </block>
+              <view class='problem-concent-tr trn'>
+                <view class='btn-tu' bindtap='pie' data-index='{{index}}'>扇形图</view>
+                <view class='btn-tu' bindtap='bar' data-index='{{index}}'>柱状图</view>
+              </view>
+            </view>
+          </view>
+          <view class='problem' wx:else>
+            <view class='problem-name'><text decode='true' class='tihao'>{{index+1}}.&nbsp;&nbsp;</text>{{item.name}}</view>
+            <view class='problem-fenxi'>
+              <text decode='true' class='renshu'>&nbsp;&nbsp;&nbsp;答题率{{item.lv}}%</text>
+              <text decode='true' class='renshu' wx:if="{{question.examineFlag==1}}">&nbsp;&nbsp;&nbsp;得分率:{{item.fractionLv}}%&nbsp;&nbsp;&nbsp;平均:{{item.average}}分</text>
+            </view>
+            <view class='problem-concent dc'>
+              <view class='problem-concent-desc' wx:if="{{item.genre==1||question.examineFlag==0}}" bindtap='xiangqing' data-index='{{index}}'>答案分析</view>
+              <view class='problem-concent-desc1' wx:if="{{item.genre==0&&question.examineFlag==1}}" bindtap='xiangqing' data-index='{{index}}'>待批阅</view>
+            </view>
+          </view>
+        </block>   
+        <view class='qrcode' wx:if="{{question.zipCode!=null}}">
+          <view>结果报告已生成请长按扫码下载</view>
+          <image src='{{host+question.zipCode}}' mode="widthFix" bindlongtap='previewImage' data-src='{{host+question.zipCode}}'></image>
+        </view>    
+      </view>
+    </view>
+    <view class="list-box {{currentPage == 2 ? '' : 'hide'}}">
+      <view class='info'>
+        <view class='commentList'>
+          <block wx:for="{{replyVos}}" wx:for-item="item" wx:key='index' >
+            <view class='comment'>
+              <view class='comment-top' data-index='{{index}}' bindtap='open'>
+                <view class='comment-top-left'>
+                  <view class='comment-top-left-tuoxiang'>
+                    <image src='{{item.avatarUrl}}' mode="widthFix"></image>
+                  </view>
+                  <view class='comment-top-left-nickname'>
+                    <view class='comment-top-left-nicknam-name'>
+                      {{item.nickName}}
+                    </view>
+                    <view class='comment-top-left-nicknam-time'>
+                      {{item.createTimeStr}}
+                    </view>
+                  </view>
+                </view>
+                <view class='comment-top-rigth'>
+                  <image src='../../../imgs/kai.png' class='zan_icon' wx:if="{{item.hide==true}}"></image>
+                  <image src='../../../imgs/guan.png' class='zan_icon' wx:if="{{item.hide==false}}"></image>
+                </view>
+              </view>
+              <view class='comment-bottom' hidden='{{item.hide}}'>
+                <view class='comment-bottom-concent'>
+                  <view class='comment-bottom-concent-tr one' bindtap='selectIp' data-ip='{{item.ipAddress}}'>
+                    <view class='table-name4'><text decode='true'>&nbsp;IP:&nbsp;</text></view>
+                    <view class='table-name5'>{{item.ipAddress}}</view>
+                    <view class='table-name6'>
+                      <image src='../../../imgs/type/dingwei.png' class='zan_icon'></image>
+                    </view>
+                  </view>
+                  <view class='comment-bottom-concent-tr' bindtap='map' wx:if="{{question.restrictFlag==1}}" data-longitude='{{item.longitude}}' data-latitude='{{item.latitude}}'>
+                    <view class='table-name4'>地址:</view>
+                    <view class='table-name5'>{{item.province}}{{item.city}}{{item.district}}{{item.street}}</view>
+                    <view class='table-name6'>
+                      <image src='../../../imgs/type/weizhi.png' class='zan_icon'></image>
+                    </view>
+                  </view>
+                  <view class='comment-bottom-concent-tr' wx:if="{{item.realName!='null'}}" bindtap='call' data-phone='{{item.realName}}' data-name='{{item.phone}}'>
+                    <view class='table-name4'>用户:</view>
+                    <view class='table-name5'>{{item.realName}}{{item.phone}}</view>
+                    <view class='table-name6'>
+                      <image src='../../../imgs/add/phone_icon.png' class='zan_icon'></image>
+                    </view>
+                  </view>
+                  <view class='comment-bottom-concent-tr'>
+                    <view class='table-name4' bindtap='detailed' data-index='{{index}}'>
+                      <view class='btn'>答卷</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='mask' wx:if="{{ip!=''||latitude!=''}}" bindtap='maskHide'>
+    <view class='ip' wx:if="{{latitude!=''}}">
+      <view class='mask-title'>
+        用户地址
+      </view>
+      <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="16" markers="{{markers}}" style="width: 100vw; height:90vh">
+          </map>
+    </view>
+    <view class='ip' wx:if="{{ip!=''}}">
+      <view class='mask-title'>
+        {{ip}}下用户列表
+      </view>
+      <scroll-view class="scroll-view_H" scroll-y style="height: 90vh;">
+        <view class='commentList'>
+          <block wx:for="{{replyVos}}" wx:for-item="item" wx:key='index' >
+            <view class='comment' wx:if="{{item.ipAddress==ip}}">
+              <view class='comment-top'>
+                <view class='comment-top-left'>
+                  <view class='comment-top-left-tuoxiang'>
+                    <image src='{{item.avatarUrl}}' mode="widthFix"></image>
+                  </view>
+                  <view class='comment-top-left-nickname'>
+                    <view class='comment-top-left-nicknam-name'>
+                      {{item.nickName}}
+                    </view>
+                    <view class='comment-top-left-nicknam-time'>
+                      {{item.createTimeStr}}
+                    </view>
+                  </view>
+                </view>
+                <view class='comment-top-rigth' data-index='{{index}}'></view>
+              </view>
+            </view>
+          </block>
+        </view>
+      </scroll-view>
+    </view>
+  </view>

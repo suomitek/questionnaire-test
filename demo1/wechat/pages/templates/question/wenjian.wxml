@@ -1,0 +1,57 @@
+<!--pages/templates/question/wenjian.wxml-->
+<template name='wenjian'>
+<view class='fileImage'>
+  <view class='xuanzeti'>
+    <view class='timu'>
+      <view class='timu-left'>{{index + 1}}.</view>
+      <view class='timu-right'>
+        <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+        <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+        <text class='bixuan' decode='true'>&nbsp;</text>
+        {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+        <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+      </view>
+    </view>
+    <view class='tupian'>
+      <view class='imgbtn' bindtap='uploadFile' data-qid="{{id}}" data-index="{{index}}">
+        选择文件
+      </view>
+    </view>
+    <view class='tupian' wx:if="{{filePath!=''}}">
+      <view class='filename1'>
+        {{host+filePath}}
+      </view>
+    </view>
+    <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+      {{errorMsg}}
+    </view>
+  </view>
+</view>
+</template>
+<template name='tupian'>
+<view class='fileImage'>
+  <view class='xuanzeti'>
+    <view class='timu'>
+      <view class='timu-left'>{{index + 1}}.</view>
+      <view class='timu-right'>
+        <text class='bixuan' decode='true'>&nbsp;&nbsp;</text>
+        <text class='bixuan' decode='true' wx:if="{{must==1}}">*</text>
+        <text class='bixuan' decode='true'>&nbsp;</text>
+        {{name}}<text style='color:#999' wx:if="{{examineFlag==1}}">[{{score}}分]</text>
+        <text style='color:#1296db' decode='true'wx:if="{{obtain>-1}}" >&nbsp;[{{score}}分]</text>
+      </view>
+    </view>
+    <view class='tupian'>
+      <view class='imgbtn' bindtap='uploadImage' data-qid="{{id}}" data-index="{{index}}">
+        选择图片
+      </view>
+    </view>
+    <view class='tupian' wx:if="{{imgPath!=''}}">
+       <image src='{{host+imgPath}}' mode="widthFix"></image>
+    </view>
+    <view class='error-msg' wx:if="{{model != 'bianji'&& errorFlag == true}}">
+      {{errorMsg}}
+    </view>
+  </view>
+</view>
+</template>

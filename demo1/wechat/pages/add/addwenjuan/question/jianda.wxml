@@ -1,0 +1,69 @@
+<!--pages/add/addwenjuan/question/jianda.wxml-->
+<view class='input-group'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/shijian_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>简答题题目</view>
+    </view>
+    <view class='tip-switch-right' data-id="1">
+      <image src='{{tiankong.cover.length == 0?"../../../../imgs/add/tupian_icon.png":host+tiankong.cover[0]}}' class='img' bindtap="previewImage" data-count='1' data-index='-1' data-attr='cover' ></image>
+    </view>
+  </view>
+  <view class='txt'>
+    <textarea placeholder='请输入题目' value='{{tiankong.name}}' data-attr='name' bindinput="bindTianKongKeyInput" placeholder-class="placeholderStyle" maxlength='1024'></textarea>
+  </view>
+</view>
+<view class='w100h20'></view>
+<view class='title'>
+  设置
+</view>
+<view class='input-group border-t border-b'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/chongfu_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>必答题</view>
+    </view>
+    <view class='tip-switch-right'>
+      <switch wx:if="{{tiankong.must==0}}"  bindchange="changeSwitch" data-attr='must'/>
+      <switch wx:if="{{tiankong.must==1}}" checked bindchange="changeSwitch" data-attr='must'/>
+    </view>
+  </view>
+</view>
+<view class='input-group border-b'>
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/chongfu_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>行数</view>
+    </view>
+    <view class='tip-switch-right' style='width:25vw'>
+      <view class="number-group">
+        <button class="number-cell" bindtap="changeNum" data-min="1" data-max="10" data-flag='-1' data-attr='lineNumber' disabled='{{disabled1lineNumber}}'>-</button>
+        <input class="number-cell" type="number" value='{{tiankong.lineNumber}}'></input>
+        <button class="number-cell" bindtap="changeNum" data-min="1" data-max="10" data-flag='1' data-attr='lineNumber' disabled='{{disabled1lineNumber}}'>+</button>
+      </view>
+    </view>
+  </view>
+</view>
+<view class='input-group border-b' wx:if="{{tiankong.examineFlag==1}}">
+  <view class='tip-switch'>
+    <view class='tip-switch-left'>
+      <image src='../../../../imgs/add/chongfu_icon.png' class='tip-icon'></image>
+      <view class='tip-title'>分值</view>
+    </view>
+    <view class='tip-switch-right' style='width:25vw'>
+      <view class="number-group">
+        <picker bindchange="changeFen"  value="{{tiankong.scoreIndex}}" range="{{numList}}">
+         <text decode='true'>&nbsp;&nbsp;&nbsp;{{numList[tiankong.scoreIndex]}}&nbsp;&nbsp;&nbsp;</text>
+        </picker>
+      </view>
+    </view>
+  </view>
+</view>
+
+
+
+<view class='btn-group'>
+  <view class='btn btnBg' bindtap="timuSave">
+      确认
+  </view>
+</view>

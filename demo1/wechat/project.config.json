@@ -1,0 +1,76 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.0.4",
+	"appid": "wx9180ac50f7edd1bf",
+	"projectname": "wenjuan",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": -1,
+					"name": "我的问卷",
+					"pathName": "pages/index/index",
+					"query": "currentPage=1",
+					"scene": null
+				},
+				{
+					"id": 1,
+					"name": "分享进入",
+					"pathName": "pages/wenjuan/detailed",
+					"query": "id=24",
+					"scene": 1007
+				},
+				{
+					"id": 2,
+					"name": "数据分析页面",
+					"pathName": "pages/wenjuan/analysis/analysis",
+					"query": "id=27",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "办复投票",
+					"pathName": "pages/vote/detailed",
+					"query": "id=15",
+					"scene": null
+				}
+			]
+		}
+	}
+}
